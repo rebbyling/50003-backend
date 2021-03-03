@@ -1,0 +1,11 @@
+<div>
+    <h3>{{  tenant.name|capfirst }}</h3>
+    <p>{{ tenant.type }}</p>
+    {% if tenant.status %}
+        <p>Status:{{  tenant.status }}</p>
+    {% endif %}
+    <p>Submitted by: {{ tenant.submitter }}</p>
+    <p>Submitted on: {{ tenant.submission_date|date:" M d Y" }}</p>
+    <p>{{ tenant.comments }}</p>
+
+</div>
