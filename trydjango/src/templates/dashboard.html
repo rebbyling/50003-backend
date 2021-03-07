@@ -1,0 +1,10 @@
+<h1>This is dashboard</h1>
+<style>
+    #hellomsg{
+        font-size:18px;
+        color:#fff;
+        margin-right:20px;
+    }
+</style>
+<span class = "hellomsg">Hello, {{request.user}} </span>
+<span ><a class = "hellomsg" href="{%url 'logout' %}">Logout</a></span> <!--send to the logout_view first then later redirect to the login_view-->
