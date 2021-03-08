@@ -54,3 +54,7 @@ def register_view(request):
 def dashboard_view(request):
     return render(request,'dashboard.html',{})
     #this restricts any person who hasnt login to access the dashboard with the decorator applied
+
+
+
+def dashboa
