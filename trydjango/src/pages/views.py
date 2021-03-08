@@ -5,6 +5,7 @@ from templates.forms import CreateUserForm #importing the form that i have creat
 from django.contrib import messages
 from django.contrib.auth import login,authenticate,logout
 from django.contrib.auth.decorators import login_required
+from .models import *
 
 
 # Create your views here.
@@ -56,5 +57,12 @@ def dashboard_view(request):
     #this restricts any person who hasnt login to access the dashboard with the decorator applied
 
 
+@login_required(login_url='login')
+def search_view(request):
+    tenant = tenants.objects.all()
 
-def dashboa
+
+
+    context = {'tenant':tenant}
+
+    return render(request ,'search.html',context)
