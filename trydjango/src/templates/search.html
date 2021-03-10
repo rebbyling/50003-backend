@@ -1,14 +1,24 @@
-<h1>search</h1>
-<form method = "get">
-    {{myFilter.form}}
-    <button class="btn btn-primary" type ="submit">Search</button>
-</form>
+<h1>hello</h1>
+<form method ="get">
+    {{filter.form}}
 
-{% for tenant in tenant %}
+
+<button class ="btn btn-primary " type ="submit"> Search </button>
+</form>
+<table>
 <tr>
-    <td> {{tenant.shop_name}}</td>
-    <td> {{tenant.auditor}}</td>
-    <td> {{tenant.date_created</td>
-    <td> {{tenant.done}}</td>
+    <th>Shop</th>
+    <th>Auditor</th>
+    <th>Date</th>
+    <th>Done</th>
+</tr>
+{% for t in tenants %}
+<tr>
+    <td>{{t.Tenant_Shop}}</td>
+    <td>{{t.Auditor}}</td>
+    <td>{{t.date}}</td>
+    <td>{{t.done}}</td>
 </tr>
 {% endfor %}
+
+</table>

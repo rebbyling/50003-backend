@@ -1,7 +1,4 @@
 from django.contrib import admin
-
+from .models import *
 # Register your models here.
-
-from .models import tenants
-
-admin.site.register(tenants)
+admin.site.register(tenant)
