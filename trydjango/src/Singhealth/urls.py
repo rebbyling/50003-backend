@@ -16,6 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from pages.views import home_view,contact_view,login_view,register_view,dashboard_view,logout_view,search_view
+from uploadImage.views import image_view, success, display_images
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',home_view,name='home'),
@@ -25,6 +29,12 @@ urlpatterns = [
     path('dashboard/',dashboard_view,name='dashboard'), 
     path('logout/',logout_view,name='logout'),   
     path('search/',search_view),
+    path('image_upload/', image_view, name = 'image_upload'), 
+    path('success/', success, name = 'success'), 
+    path('display_images/', display_images, name = 'display_images'),
     
-
 ]
+
+if settings.DEBUG:
+        urlpatterns += static(settings.MEDIA_URL,
+                              document_root=settings.MEDIA_ROOT)
