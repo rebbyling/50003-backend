@@ -1,5 +1,37 @@
-{% extends 'base.html' %}
-{% block content %}
-<h1>is this working</h1>
-<p>"this is a template" </p>
-{% endblock %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="Navbar.css" />
+  </head>
+
+  <body>
+    {% extends 'base.html' %} {% block content %}
+    <h1>is this working</h1>
+    <p>"this is a template"</p>
+    {% endblock %}
+
+    <div class="NavbarItems">
+      <ul class="MenuIcon">
+        <li class="icon">
+          <a href="/src/templates/search.html">
+            <img src="assets/searchIcon.svg" width="100"
+          /></a>
+        </li>
+        <li class="icon">
+          <a href="/src/templates/home.html"
+            ><img src="assets/homeIcon.svg" width="100"
+          /></a>
+        </li>
+        <li class="icon">
+          <a href="/src/templates/avatar.html"
+            ><img src="assets/avatarIcon.svg" width="100" />
+          </a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
