@@ -9,8 +9,170 @@
       crossorigin="anonymous"
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    {% comment %}
     <link rel="stylesheet" href="{% static 'css/Navbar.css' %}" />
     <link rel="stylesheet" href="{% static 'css/search.css' %}" />
+    {% endcomment %}
+    <style>
+      body {
+        margin: 2.5rem;
+        font-family: "Poppins", sans-serif;
+        color: #4460a9;
+        font-weight: 350;
+        font-size: 4vw;
+      }
+
+      h1 {
+        margin-bottom: 0%;
+        font-size: 6rem;
+        display: block;
+        float: inline-start;
+        font-weight: 700;
+      }
+
+      h4 {
+        margin-top: 0%;
+        color: #ff7c5e;
+        display: inline-block;
+      }
+
+      input {
+        padding-left: 2rem;
+        font-family: "Poppins", sans-serif;
+        color: #ff7c5e;
+        font-weight: 400;
+        font-size: 4vw;
+      }
+
+      .searchBar {
+        width: 75%;
+        border-radius: 6rem;
+        height: 5rem;
+        border-style: solid;
+        border-width: thick;
+        border-color: #4460a9;
+        margin-bottom: 1rem;
+      }
+      .flex {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+      }
+
+      .searchButton {
+        border-style: solid;
+        border-color: #4460a9;
+        color: #fff;
+        text-decoration: none;
+        background-color: #4460a9;
+        width: 22%;
+        border-radius: 4rem;
+        margin-bottom: 1rem;
+        height: 5rem;
+      }
+
+      table {
+        border-collapse: collapse;
+        display: block;
+        height: 600px;
+        width: 100%;
+
+        overflow-y: auto;
+        border-radius: 8px 8px 8px 8px;
+      }
+      tbody {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .height {
+        height: 300px;
+      }
+      table td,
+      table th {
+        border: 1px solid #ddd;
+        padding-left: 20px;
+        padding-right: 10px;
+        padding-bottom: 15px;
+        padding-top: 15px;
+        width: max-content;
+      }
+
+      table tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      table tr:hover {
+        background-color: #ddd;
+      }
+
+      table th {
+        padding-top: 6px;
+        padding-bottom: 6px;
+        text-align: left;
+        background-color: #f0dfd6;
+        font-weight: 550;
+      }
+
+      .tableContainer {
+        height: 350px;
+      }
+
+      ul {
+        display: inline;
+        list-style: none;
+        padding: 0;
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        padding-inline-start: 0%;
+      }
+
+      ul > li {
+        list-style: none;
+        display: inline;
+        margin: 0%;
+        margin-block-start: 0%;
+      }
+
+      .NavbarItems {
+        background: white;
+        height: 7%;
+        width: 100%;
+        left: 0%;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        position: fixed;
+        bottom: 0%;
+        box-shadow: 0px -5px 20px rgb(207, 207, 207);
+      }
+
+      .MenuIcon {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        text-align: center;
+        list-style: none;
+      }
+      .icon {
+        display: inline-block;
+        padding-right: 60px;
+        padding-left: 60px;
+      }
+      .first {
+        left: 25%;
+        position: relative;
+      }
+      .second {
+        left: 50%;
+        position: relative;
+      }
+      .third {
+        left: 75%;
+        position: relative;
+      }
+    </style>
   </head>
   <body>
     <h1>SEARCH</h1>
