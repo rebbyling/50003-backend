@@ -36,22 +36,20 @@
         display: inline-block;
       }
 
-      input {
-        padding-left: 2rem;
-        font-family: "Poppins", sans-serif;
-        color: #ff7c5e;
-        font-weight: 400;
-        font-size: 4vw;
-      }
-
       .searchBar {
-        width: 75%;
+        display: block;
+        width: 73%;
         border-radius: 6rem;
         height: 5rem;
         border-style: solid;
         border-width: thick;
         border-color: #4460a9;
         margin-bottom: 1rem;
+        padding-left: 2rem;
+        font-family: "Poppins", sans-serif;
+        color: #ff7c5e;
+        font-weight: 400;
+        font-size: 4vw;
       }
       .flex {
         display: flex;
@@ -65,7 +63,7 @@
         color: #fff;
         text-decoration: none;
         background-color: #4460a9;
-        width: 22%;
+        width: 25%;
         border-radius: 4rem;
         margin-bottom: 1rem;
         height: 5rem;
@@ -176,8 +174,8 @@
   </head>
   <body>
     <h1>SEARCH</h1>
-    <form method="get">
-      <input class="searchBar" value="{{filter.form}}" />
+    <form method="get" class="flex">
+      <div class="searchBar">{{filter.form}}</div>
       <button class="searchButton" type="submit">Search</button>
     </form>
     <table>
