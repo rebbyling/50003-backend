@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -9,10 +10,9 @@
       crossorigin="anonymous"
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    {% comment %}
-    <link rel="stylesheet" href="{% static 'css/Navbar.css' %}" />
+
     <link rel="stylesheet" href="{% static 'css/search.css' %}" />
-    {% endcomment %}
+
     <style>
       body {
         margin: 2.5rem;
@@ -175,7 +175,7 @@
   <body>
     <h1>SEARCH</h1>
     <form method="get" class="flex">
-      <div class="searchBar">{{filter.form}}</div>
+      {% csrf_token %} {{filter.form}}
       <button class="searchButton" type="submit">Search</button>
     </form>
     <table>
