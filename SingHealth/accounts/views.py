@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import AuditForm, CreateUserForm
 from .filters import AuditFilter
 from django.contrib.auth.forms import UserCreationForm
+from django.views.generic import TemplateView
 
 
 def registerPage(request):
@@ -102,3 +103,17 @@ def updateAudit(request):
     # form = AuditForm(instance=audit)
     context = {'form': form}
     return render(request, 'accounts/audit_form.html', context)
+
+
+
+
+
+class tenantchartview(TemplateView):
+    #view for tenants graph
+    template_name='accounts/chart.html'
+    
+
+    def get_context_data(self,**kwargs):
+        context=super().get_context_data(**kwargs)
+        context["qs"]= tenant_score.objects.all()
+        return context 

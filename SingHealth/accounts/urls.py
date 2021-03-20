@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('register/', views.registerPage, name="register"),
@@ -10,5 +11,7 @@ urlpatterns = [
     path('staff/<str:pk>/', views.staff, name="staff"),
     path('create_audit/', views.createAudit, name="create_audit"),
     path('update_audit/', views.updateAudit, name="update_audit"),
+    path('chart/',views.tenantchartview.as_view(),name='chart'),
+    
 
 ]
