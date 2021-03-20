@@ -12,6 +12,7 @@ urlpatterns = [
     path('create_audit/', views.createAudit, name="create_audit"),
     path('update_audit/', views.updateAudit, name="update_audit"),
     path('chart/',views.tenantchartview.as_view(),name='chart'),
+    path('export_excel',views.export_excel,name='export'),
     
 
 ]
