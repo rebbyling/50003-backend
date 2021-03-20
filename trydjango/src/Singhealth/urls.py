@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from pages.views import home_view,contact_view,login_view,register_view,dashboard_view,logout_view,search_view
 from uploadImage.views import image_view, success, display_images
+from checklist.views import health_view
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -32,7 +33,7 @@ urlpatterns = [
     path('image_upload/', image_view, name = 'image_upload'), 
     path('success/', success, name = 'success'), 
     path('display_images/', display_images, name = 'display_images'),
-    
+    path('checklist/',health_view, name = 'health'),
 ]
 
 if settings.DEBUG:

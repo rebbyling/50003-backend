@@ -13,8 +13,10 @@ from .models import *
 def home_view(request,*args,**kwargs):
     return render(request,"home.html",{})
     #url.py from Singhealth project will look at the page.views or any other app views u creeated
+
 def contact_view(*args,**kwargs):
     return HttpResponse("<h1> Testing </h1>")
+
 def login_view (request,*args,**kwargs):
     if request.user.is_authenticated :
         return redirect('dashboard')
@@ -31,6 +33,7 @@ def login_view (request,*args,**kwargs):
                 messages.info(request , 'Invalid Username or Password')
 
         return render (request,'login.html',{})
+
 def logout_view(request):
     logout(request)
     return redirect('login')
@@ -52,6 +55,7 @@ def register_view(request):
 
         context={'form':form}
         return render(request,'register.html',context)
+
 @login_required(login_url='login') ##any views that can only be accessed via login is guarded by this decorator
 def dashboard_view(request):
     return render(request,'dashboard.html',{})
@@ -60,12 +64,10 @@ def dashboard_view(request):
 
 @login_required(login_url='login') ##any views that can only be accessed via login is guarded by this decorator
 def search_view(request):
-
-    
     
     #context ={'filter':filter}
     tenants = tenant.objects.all()#querying the database and taking all the objects from the database under the model
-    filter=tenantFilter(request.GET,queryset=tenants)
+    filter = tenantFilter(request.GET,queryset=tenants)
     tenants=filter.qs
 
     context_2 ={'tenants':tenants,'filter':filter}

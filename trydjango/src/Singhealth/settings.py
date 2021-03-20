@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'pages',
     'django_filters',
     'uploadImage',
+    'checklist',
 ]
 
 MIDDLEWARE = [
