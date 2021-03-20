@@ -1,0 +1,66 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+<br>
+    <div class="row">
+        <div class="col-md-5">
+            <h5>Upcoming Audits:</h5>
+            <hr>
+            <div class="card card-body">
+                <a class="btn btn-primary btn-sm btn-block" href="">
+                </a>
+                <table class="table">
+                    <tr>
+                        <th>Tenant Name</th>
+                        <th>Status</th>
+                        <th>Update</th>
+                    </tr>
+                    {% for i in tenants %}
+                        <tr>
+                            <td>{{ i.name }}</td>
+                            <td>{{ i.status }}</td>
+                            {% if i.status in "Pending" %}
+                            <td><a class="btn btn-sm btn-info" href="{% url 'update_audit' %}">Update</a> </td>
+                            {% endif %}
+
+                        </tr>
+
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <h5>Recent AUDITS</h5>
+            <hr>
+            <div class="card card-body">
+                <a class="btn btn-primary btn-sm btn-block" href="">Audit Records</a>
+                <table class="table table-sm">
+                    <tr>
+                        <th>Tenant</th>
+
+                        <th>Date Audited</th>
+                        <th>Status</th>
+
+                        <th>Update</th>
+
+
+                    </tr>
+                    {% for i in audits %}
+                        <tr>
+                            <td>{{ i.tenant }}</td>
+
+                            <td>{{ i.date_audited }}</td>
+                            <td>{{ i.status }}</td>
+
+                            {% if i.status in "Fail" %}
+                            <td><a class="btn btn-sm btn-danger" href="">Update</a></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
