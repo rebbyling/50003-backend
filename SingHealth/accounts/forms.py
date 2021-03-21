@@ -22,5 +22,6 @@ class checklistForm(forms.Form):
     health3 = forms.BooleanField(required = False)
     safety1 = forms.BooleanField(required = False)
     safety2 = forms.BooleanField(required = False)
+
     
     
