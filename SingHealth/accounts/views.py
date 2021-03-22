@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import AuditForm, CreateUserForm
+from .forms import AuditForm, CreateUserForm, checklistForm
 from .filters import AuditFilter
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import TemplateView
@@ -106,6 +106,34 @@ def updateAudit(request):
     context = {'form': form}
     return render(request, 'accounts/audit_form.html', context)
 
+def checklist_view(request):
+    score = 0
+    form = checklistForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            health1 = form.cleaned_data['health1'] #return true if the health1 is checked
+            health2 = form.cleaned_data['health2']
+            health3 = form.cleaned_data['health3']
+            safety1 = form.cleaned_data['safety1']
+            safety2 = form.cleaned_data['safety2']
+            # adding up the score by brutal force
+            if health1:
+                score += 1
+            if health2:
+                score += 1
+            if health3:
+                score += 1
+            if safety1:
+                score += 1
+            if safety2:
+                score += 1
+            print("score = " + str(score))
+    else:
+        form = checklistForm()
+    context = {}
+    context['checklist'] = checklistForm()
+
+    return render(request, 'checklist.html', context)
 
 
 
@@ -113,7 +141,6 @@ def updateAudit(request):
 class tenantchartview(TemplateView):
     #view for tenants graph
     template_name='accounts/chart.html'
-    
     
 
     def get_context_data(self,**kwargs):

@@ -34,7 +34,6 @@ class Audit(models.Model):
         ('Pending', 'Pending'),
         ('Pass', 'Pass'),
         ('Fail', 'Fail'),
-
     )
     date_audited = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=50, choices=STATUS)
