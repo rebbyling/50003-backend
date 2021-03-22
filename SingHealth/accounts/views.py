@@ -8,6 +8,10 @@ from django.contrib.auth.decorators import login_required
 from .forms import AuditForm, CreateUserForm, checklistForm
 from .filters import AuditFilter
 from django.contrib.auth.forms import UserCreationForm
+from django.views.generic import TemplateView
+import xlwt
+
+import datetime
 
 def registerPage(request):
     if request.user.is_authenticated:
@@ -130,3 +134,53 @@ def checklist_view(request):
     context['checklist'] = checklistForm()
 
     return render(request, 'checklist.html', context)
+
+
+
+
+class tenantchartview(TemplateView):
+    #view for tenants graph
+    template_name='accounts/chart.html'
+    
+
+    def get_context_data(self,**kwargs):
+        context=super().get_context_data(**kwargs)
+        context["qs"]= tenant_score.objects.all()
+        ## this qs will be passed into the chart.html template , the model used will be changed with sky's model, this model is empty and does not have any data, hence the graph displays nothing
+        ##url link is /chart/
+        ##
+        return context 
+
+
+def export_excel(request):
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition']='attachment; filename = "SinghealthAudit'+str(datetime.datetime.now())+'.xls"'
+    # file format when i download the object Singhealthaudit+datetime.xls
+
+    workbook=xlwt.Workbook(encoding='utf-8')#this is to add the sheets into the workbook
+    ws=workbook.add_sheet('SinghealthAudit')
+
+    #row number for excel sheet
+    row_num =0
+    font_style=xlwt.XFStyle()
+    #making the first row bold
+
+    columns=['Name','Status','Category','date_created','description'] ##the header names of the column what should be exported?
+
+    for column_number in range(len(columns)):
+        ws.write(row_num,column_number,columns[column_number],font_style )
+        #writing the name of the contents into the column header  into the workbook in 135 
+    font_style=xlwt.XFStyle()
+
+    rows = Tenant.objects.all().values_list('name','status','category','date_created','description')
+
+    for row in rows:
+        row_num+=1
+
+        for column_number in range(len(row)):
+            ws.write(row_num,column_number,str(row[column_number]),font_style)
+
+        
+    workbook.save(response)
+    
+    return response
