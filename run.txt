@@ -6,6 +6,7 @@ source myenv/bin/activate
 pip install django
 pip install django_filter
 python -m pip install Pillow
+pip install django-multiselectfield
 
 #run the server
 python3 manage.py runserver
@@ -14,3 +15,13 @@ python3 manage.py runserver
 python3 manage.py startapp <new function name>
 #and remember to go setting.py to add it into INSTALLED_APPS
 
+requirements.txt
+Django==3.1.7
+django_filter==2.4.0
+Pillow
+pytz
+
+python install -r requirement.txt
+
+#to run the test
+python manage.py test accounts

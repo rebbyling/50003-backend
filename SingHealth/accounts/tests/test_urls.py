@@ -30,6 +30,7 @@ class TestUrls(SimpleTestCase):
         self.assertEquals(resolve(url).func, tenants)
 
     #def test_staff_url_is_resolved(self):
+            #id = 1 (integer) / 2,3,4
     #    url = reverse('staff/<str:pk>')
     #    print(resolve(url))
     #    self.assertEquals(resolve(url).func, staff)

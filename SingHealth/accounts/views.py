@@ -9,7 +9,6 @@ from .forms import AuditForm, CreateUserForm, checklistForm
 from .filters import AuditFilter
 from django.contrib.auth.forms import UserCreationForm
 
-
 def registerPage(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -124,7 +123,7 @@ def checklist_view(request):
                 score += 1
             if safety2:
                 score += 1
-            print("score =" + str(score))
+            print("score = " + str(score))
     else:
         form = checklistForm()
     context = {}
