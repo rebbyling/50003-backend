@@ -13,6 +13,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import TemplateView
 from .decorators import  unauthenticated_user, allowed_users,admin_only
 import xlwt
+from django.core.mail import send_mail, EmailMessage
+from SingHealth.settings import EMAIL_HOST_USER
 
 import datetime
 
@@ -211,3 +213,32 @@ def audit_details(request, pk):
             'audits' : audits
             }
     return render(request,'accounts/tenantsdetails.html', context)
+    
+#This email can type commments and attach file
+@login_required(login_url='login')
+def send_mail_plain_with_file(request):
+    message=request.POST.get('message','')
+    subject=request.POST.get('subject','')
+    mail_id=request.POST.get('email','')
+    email = EmailMessage(subject,message,EMAIL_HOST_USER,[mail_id])
+    email.content_subtype='html'
+    
+    file =request.FILES["file"]#in the html email name ='file'
+    email.attach(file.name,file.read(),file.content_type)
+    email.send()
+    return redirect('http://127.0.0.1:8000/mail/')
+
+#This  email can only type  comments 
+@login_required(login_url='login')
+def send_plain_mail(request):
+    message=request.POST.get('message','')
+    subject=request.POST.get('subject','')
+    mail_id=request.POST.get('email','')
+    email = EmailMessage(subject,message,EMAIL_HOST_USER,[mail_id])
+    email.content_subtype='html'
+    email.send()
+    return redirect('http://127.0.0.1:8000/mail/')
+
+@login_required(login_url='login')
+def email(request):
+    return render(request,"accounts/email.html")

@@ -20,7 +20,11 @@ urlpatterns = [
     path('export_excel/',views.export_excel,name='export_excel'),
     path('upload_image/',views.uploadImage, name='upload_image'),
     path('search/',views.search, name='search'),
-    path('tenantsD/<str:pk>/',views.audit_details, name='tenantsDetail')
+    path('tenantsD/<str:pk>/',views.audit_details, name='tenantsDetail'),
+    path('send_mail_plain_with_file',views.send_mail_plain_with_file,name='plain_email'),
+    path('mail/',views.email,name='mail'),
+    path('send_plain_mail',views.send_plain_mail,name='plain_email'),
+
 
 
 ]
