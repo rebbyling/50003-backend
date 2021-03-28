@@ -1,0 +1,32 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+    <div>
+        <h3>Tenant Only</h3>
+        <table class="">
+      <tr>
+        <th>Tenant Name</th>
+        <th>Status</th>
+          <th>Timestamp Track</th>
+          <th>Comment</th>
+          <th>Update</th>
+
+      </tr>
+            {% for i in audits %}
+      <tr>
+        <td>{{ i.tenant.name }}</td>
+        <td>{{ i.status }}</td>
+      <td>{{ i.date_audited }}</td>
+      <td>{{ i.comment }}</td>
+      {% if i.status in "Fail" %}
+        <td>
+          <a class="updateButton" href="{% url 'upload_image' %}">Update</a>
+
+        </td>
+      {% endif %}
+      </tr>
+            {% endfor %}
+    <a class="btn btn-sm btn-danger" href="{% url 'logout' %}">Logout</a>
+
+
+  </div>
+{% endblock %}

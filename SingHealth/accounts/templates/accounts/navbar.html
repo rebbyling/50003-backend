@@ -1,0 +1,35 @@
+{% load static %} 
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Navbar</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'CSS/Navbar.css' %}" />
+    <link rel="stylesheet" href="{% static 'CSS/index.css' %}" />
+  </head>
+</html>
+<body>
+  <div class="NavbarItems">
+    <ul class="MenuIcon">
+        {% if request.user.is_staff %}
+      <li class="icon">
+        <a href="{% url 'search' %}">
+          <img src="{% static 'images/searchIcon.svg' %}" width="100"
+        /></a>
+      </li>
+      <li class="icon">
+        <a href="{% url 'home' %}"
+          ><img src="{% static 'images/homeIcon.svg' %}" width="100"
+        /></a>
+      </li>
+      <li class="icon">
+        <a href="{% url 'logout' %}"
+          ><img src="{% static 'images/avatarIcon.svg' %}" width="100" />
+        </a>
+      </li>
+        {% endif %}
+    </ul>
+  </div>
+</body>
+

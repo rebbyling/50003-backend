@@ -1,0 +1,56 @@
+{% extends 'accounts/main.html' %}
+{% load static %} 
+{% block content %}
+
+<html>
+  <head>
+    <title>Tenant Details</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'CSS/Navbar.css' %}" />
+    <link rel="stylesheet" href="{% static 'CSS/tenant.css' %}" />
+    <link rel="stylesheet" href="{% static 'CSS/index.css' %}"  rel="stylesheet" type="text/css"/>
+  </head>
+
+        <h1>{{tenants.name}}</h1>
+        <h4>Category : {{tenants.category}}</h4>
+        <h4>Date Started : {{tenants.date_created}}</h4>
+        <h4>Status : {{tenants.status}}</h4>
+        <h4>Description : {{tenants.description}}</h4>
+
+        
+        {% comment %} {% include "./chart.html" %} {% endcomment %}
+        
+        <h2>Past Audits</h2>
+        <div><a href={% url 'chart' %}>View Graph ></a>
+        <a href = "{% url 'export_excel' %} " style="float:right">Export Graph as Excel ></a></div>
+        
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>ID</th>
+                <th>Conducted By</th>
+                <th>Score</th>
+                {% comment %} <th>Comment(Score)</th> {% endcomment %}
+                <th>View</th>
+            </tr>
+            {% for i in audits %}
+                <tr>
+                    <td>{{ i.date_audited }}</td>
+                    <td>{{ i.pk }}</td>
+                    <td>{{ i.staff }}</td>
+                    <td>{{ i.score }}</td>
+                    {% comment %} <td>{{ i.comment }}</td> {% endcomment %}
+                    <td>
+                        
+                            <button  class="Gallery" onclick = "location.href = ' '">Details</button>
+                        
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+</html>
+
+{% endblock %}
