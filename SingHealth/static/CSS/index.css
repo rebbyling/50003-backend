@@ -1,10 +1,10 @@
 body {
-  margin: 2.5rem;
+  margin: 2rem;
   font-family: "Poppins", sans-serif;
   color: #4460a9;
   font-weight: 350;
   font-size: 3.5vw;
-}
+  height:90%}
 
 .uploadImage {
   margin-top: 30px;
@@ -41,7 +41,7 @@ input {
 .searchBar {
   width: 70%;
   border-radius: 6rem;
-  height: 90px;
+  height: 85px;
   border-style: solid;
   border-width: thick;
   border-color: #4460a9;
@@ -71,6 +71,7 @@ table {
   overflow-y: auto;
   overflow-x: hidden;
   border-radius: 8px 8px 8px 8px;
+  margin-top: 2%;
 }
 .height {
   height: 300px;
@@ -112,6 +113,7 @@ h1 {
   font-weight: 600;
   display: block;
   width: 100%;
+  margin-top: 0%;
 }
 
 h2 {
@@ -210,6 +212,8 @@ img.plusbtn {
   border-radius: 50px;
   background-color: #ffffff;
   color: #4460a9;
+  font-size: 2rem;
+  font-family: "Poppins", sans-serif;
 }
 
 .centre {
@@ -217,6 +221,7 @@ img.plusbtn {
   justify-content: center;
   align-items: center;
   display: flex;
+  padding-bottom: 15%;
  
 }
 .completeAudit {
@@ -230,4 +235,7 @@ img.plusbtn {
   color: #4460a9;
   text-decoration: none;
   box-shadow: 0px 0px 20px rgb(139, 139, 139);
+  font-size: 2rem;
+    font-family: "Poppins", sans-serif;
 }
+

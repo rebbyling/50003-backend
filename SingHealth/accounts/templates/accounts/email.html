@@ -1,58 +1,82 @@
+{% extends 'accounts/main.html' %}
+{% load static %} 
+{% block content %}
 
+<html>
+  <head>
+    <title>Tenant Details</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'CSS/Navbar.css' %}" />
+    <link rel="stylesheet" href="{% static 'CSS/mail.css' %}" />
+    
+  </head>
+  <body>
+  <h1>MAIL TENANT</h1>
+  <h4>Let tenants know of Non-Compliance issues</h4>
+  <div >
     <form action="/send_mail_plain_with_file" method="post" enctype="multipart/form-data"> 
         {% csrf_token %}
-        <div class="form-group">
+        <div class="form-group" style="margin-top:5%; ">
             <label class="control-label">
                 Email :
             </label>
-            <input type="text" name="email" class="form-control">
+            <input type="text" name="email" class="searchBar">
         </div>
         <div class="form-group">
             <label class="control-label">
                 Subject :
             </label>
-            <input type="text" name="subject" class="form-control">
+            <input type="text" name="subject" class="searchBar">
         </div>
         <div class="form-group">
             <label class="control-label">
                 Message :
             </label>
-            <textarea name="message" class="form-control" rows="5"></textarea>
+            <textarea name="message" class="text" rows="5"></textarea>
         </div>
         <div class="form-group">
             <label class="control-label">
                 File :
             </label>
-            <input type="file" name="file" class="form-control">
+            <input type="file" name="file" class="">
         </div>
 
-        <div class="form-group">
-            <button type="submit" class="btn btn-success">Send Mail </button>
+        <div class="form-group" style="padding-bottom: 30%;">
+            <button type="submit" class="uploadSubmit">Send Mail </button>
         </div>
     </form>
+    </div>
     <!--send_mail_plain_with_file in form action='/send_mail_plain_with_file' this word will be in the path url-->
-
+    {% comment %} <div style="margin-top:5%; ">
     <form action="/send_plain_mail" method="post">
         {% csrf_token %}
-        <div class="form-group">
+        <div class="form-group " style="margin-top:20%">
             <label class="control-label">
                 Email :
             </label>
-            <input type="text" name="email" class="form-control">
+            <input type="text" name="email" class="searchBar">
         </div>
         <div class="form-group">
             <label class="control-label">
                 Subject :
             </label>
-            <input type="text" name="subject" class="form-control">
+            <input type="text" name="subject" class="searchBar">
         </div>
         <div class="form-group">
             <label class="control-label">
                 Message :
             </label>
-            <textarea name="message" class="form-control" rows="5"></textarea>
+            <textarea name="message" class="" rows="5"></textarea>
         </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-success">Send Mail</button>
+        <div class="form-group" style="padding-bottom: 30%;">
+            <button type="submit" class="uploadSubmit">Send Mail</button>
         </div>
     </form>
+     </div> {% endcomment %}
+    </body>
+    </html>
+
+    {% endblock %}
