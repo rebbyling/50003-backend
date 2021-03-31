@@ -7,7 +7,7 @@ from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group, User
-from .forms import AuditForm, CreateUserForm
+from .forms import AuditForm, CreateUserForm ,AddItemForm,CheckboxForm,ScoreForm
 from .filters import AuditFilter
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import TemplateView
@@ -15,6 +15,7 @@ from .decorators import  unauthenticated_user, allowed_users,admin_only
 import xlwt
 from django.core.mail import send_mail, EmailMessage
 from SingHealth.settings import EMAIL_HOST_USER
+
 
 import datetime
 
@@ -242,3 +243,17 @@ def send_plain_mail(request):
 @login_required(login_url='login')
 def email(request):
     return render(request,"accounts/email.html")
+
+
+def calculate_score(request):
+    form = ScoreForm(request.POST)
+    if form.is_valid():
+        checked = form.cleaned_data['items']
+        score = checked.count()
+        score_object = ChecklistScore(score = score)
+        score_object.save()
+        score_object.tenant = tenant
+        score_object.save()
+        context['score'] = score
+        context['checked'] = score_object.checked
+        context['test'] = score_object.unchecked

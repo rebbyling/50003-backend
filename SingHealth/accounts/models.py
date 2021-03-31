@@ -1,5 +1,9 @@
 from django.db import models
-
+from django.utils import timezone
+from django.contrib.auth import get_user_model
+from django.conf import settings
+from django.contrib.auth.models import User
+from picklefield.fields import PickledObjectField
 
 # Create your models here.
 class Staff(models.Model):
@@ -56,8 +60,40 @@ class tenant_score(models.Model):
     
     def __str__(self):
         return"{}-{}".format(self.name,self.score)
-         
 
+
+
+
+
+class checklistconditions(models.Model):
+    description = models.CharField(max_length=20,null=True,default="null")
+    box = models.BooleanField(blank=True,default=False)
+    
+    def __str__(self):
+        return self.description
+    #this model contains the checklist conditions which can be added later on
+
+
+class Checklist(models.Model):
+    items=models.ManyToManyField(checklistconditions,related_name="checklist")
+    def __str__(self):
+        return self.category
+
+
+class ChecklistScore(models.Model):
+    date_created = models.DateTimeField(default=timezone.now, null=True)
+    score = models.PositiveIntegerField(null = True)
+    tenant = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete = models.CASCADE, related_name='tenant_checklist')
+    def __str__(self):
+        return str(self.date_created)[:10] + "; Score: " + str(self.score) + " (" + str(self.tenant.username) + ")" 
+
+    ##models.Cascade when reference object is deleted , also deletes the object that have references to it .
+    ##need to add dropdownlist
+
+    
+
+
+    
 
 
 
