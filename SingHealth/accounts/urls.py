@@ -24,6 +24,8 @@ urlpatterns = [
     path('send_mail_plain_with_file',views.send_mail_plain_with_file,name='plain_email'),
     path('mail/',views.email,name='mail'),
     path('send_plain_mail',views.send_plain_mail,name='plain_email'),
+    path('checklist/',views.checklist_view,name='checklist'),
+    #path('calculate',views.calculate,name='calculate'),
 
 
 

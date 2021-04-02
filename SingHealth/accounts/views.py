@@ -7,7 +7,7 @@ from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group, User
-from .forms import AuditForm, CreateUserForm ,AddItemForm,CheckboxForm,ScoreForm
+from .forms import AuditForm, CreateUserForm ,ScoreForm
 from .filters import AuditFilter
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import TemplateView
@@ -245,15 +245,35 @@ def email(request):
     return render(request,"accounts/email.html")
 
 
-def calculate_score(request):
-    form = ScoreForm(request.POST)
-    if form.is_valid():
-        checked = form.cleaned_data['items']
-        score = checked.count()
-        score_object = ChecklistScore(score = score)
-        score_object.save()
-        score_object.tenant = tenant
-        score_object.save()
-        context['score'] = score
-        context['checked'] = score_object.checked
-        context['test'] = score_object.unchecked
+
+
+#def calculate(request):
+    #form=ScoreForm(request.POST)
+    #formc = ScoreForm(request.POST)
+    #if request.method=="POST":
+        #checked = form.cleaned_data['items']
+        #score = checked.count()
+        #score_object = ChecklistScore(score = score)
+        #score_object.save()
+        #score_object.checked = list(checked.values_list('description', flat=True))
+        #score_object.unchecked = list(set(formc.fields['items'].queryset.values_list('description', flat=True)) - set(score_object.checked))
+        #score_object.save()
+        #context['score'] = score
+        #context['checked'] = score_object.checked
+        #context['test'] = score_object.unchecked
+    #return redirect('http://127.0.0.1:8000/checklist/')
+def checklist_view(request):
+    context={}
+    if request.method =='POST':
+        form =ScoreForm(request.POST)
+        if form.is_valid():
+            instance=form.save(commit=False)
+            instance.Staff=request.user
+            instance.save()
+            return redirect('http://127.0.0.1:8000/checklist/')
+    else:
+        form=ScoreForm()
+    context['form']=form
+    return render(request,"accounts/checklistform.html",context)
+
+
