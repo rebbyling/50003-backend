@@ -275,6 +275,6 @@ def checklist_view(request):
     else:
         form=ScoreForm()
     context['form']=form
-    return render(request,"accounts/checklistform.html",context)
+    return render(request,"accounts/audit_form.html",context)
 
 

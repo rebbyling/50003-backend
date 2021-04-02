@@ -78,7 +78,7 @@ class tenant_score(models.Model):
 
 class checklist(models.Model):
     VIOLATION = (
-        ('Cockroaches everywhere','Cockroaches everywhere'),
+        ('Wet Floors','Wet Floors'),
         ('Oily floors','Oily floors'),
         ('Rats','Rats'),
         ('Safety Hazards','Safety Hazards'),

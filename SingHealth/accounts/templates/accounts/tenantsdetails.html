@@ -34,7 +34,7 @@
                 <th>Conducted By</th>
                 <th>Score</th>
                 {% comment %} <th>Comment(Score)</th> {% endcomment %}
-                <th>View</th>
+                {% comment %} <th>View</th> {% endcomment %}
             </tr>
             {% for i in audits %}
                 <tr>
@@ -42,15 +42,18 @@
                     <td>{{ i.pk }}</td>
                     <td>{{ i.staff }}</td>
                     <td>{{ i.score }}</td>
-                    {% comment %} <td>{{ i.comment }}</td> {% endcomment %}
+                    {% comment %} <td>{{ i.comment }}</td> 
                     <td>
                         
                             <button  class="Gallery" onclick = "location.href = ' '">Details</button>
                         
-                    </td>
+                    </td>{% endcomment %}
                 </tr>
             {% endfor %}
         </table>
+
+        <h2>Photos Taken</h2>
+        <h4>i will need someone to help populate the uploaded images here :''-)</h4>
 </html>
 
 {% endblock %}

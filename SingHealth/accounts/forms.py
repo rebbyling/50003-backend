@@ -45,8 +45,8 @@ class ScoreForm(forms.ModelForm):
 
 class AuditForm(ModelForm):
     class Meta:
-        model = Audit
-        fields = '__all__'
+        model = checklist
+        fields = ['tenant', 'checklist_items', 'score']
 
 
 class CreateUserForm(UserCreationForm):
