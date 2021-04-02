@@ -31,7 +31,7 @@ var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: [{% for items in qs %}'{{items.name}}',{% endfor %}],
+        labels: [{% for items in qs %}'{{items.tenant.name}}',{% endfor %}],
         datasets: [{
             label: 'Score Value',
             data: [{% for items in qs %}'{{items.score}}',{% endfor %}],

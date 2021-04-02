@@ -165,7 +165,7 @@ class tenantchartview(TemplateView):
 
     def get_context_data(self,**kwargs):
         context=super().get_context_data(**kwargs)
-        context["qs"]= tenant_score.objects.all()
+        context["qs"]= checklist.objects.all()
         ## this qs will be passed into the chart.html template , the model used will be changed with sky's model, this model is empty and does not have any data, hence the graph displays nothing
         ##url link is /chart/
         ##
@@ -186,14 +186,15 @@ def export_excel(request):
     font_style=xlwt.XFStyle()
     #making the first row bold
 
-    columns=['Name','Score'] ##the header names of the column what should be exported?
+    columns=['Tenant','Score'] ##the header names of the column what should be exported?
 
     for column_number in range(len(columns)):
         ws.write(row_num,column_number,columns[column_number],font_style )
         #writing the name of the contents into the column header  into the workbook in 135 
     font_style=xlwt.XFStyle()
 
-    rows = tenant_score.objects.all().values_list('name','score')
+    #rows = tenant_score.objects.all().values_list('name','score')
+    rows = tenant_score.objects.all().values_list('tenant.name','score')
 
     for row in rows:
         row_num+=1
