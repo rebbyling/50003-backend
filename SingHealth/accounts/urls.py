@@ -25,8 +25,6 @@ urlpatterns = [
     path('mail/',views.email,name='mail'),
     path('send_plain_mail',views.send_plain_mail,name='plain_email'),
 
-
-
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

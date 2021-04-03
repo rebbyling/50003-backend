@@ -3,10 +3,11 @@ virtualenv myenv
 source myenv/bin/activate
 
 #install necessary library
-pip install django
-pip install django_filter
+pip3 install django
+pip3 install django_filter
 python -m pip install Pillow
-pip install django-multiselectfield
+pip3 install django-multiselectfield
+pip3 install xlwt
 
 #run the server
 python3 manage.py runserver

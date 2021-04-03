@@ -35,9 +35,6 @@ def registerPage(request):
     context = {'form': form}
     return render(request, 'accounts/register.html', context)
 
-
-
-
 @unauthenticated_user
 def loginPage(request):
     if request.method == "POST":
@@ -108,6 +105,17 @@ def createAudit(request):
             form.save()
             return redirect('/')
     context = {'form': form}
+
+    if request.method=="POST":
+        upload_file = request.FILES['document']
+        print(upload_file.name)
+        print(upload_file.size)
+        fs = FileSystemStorage()
+        name = fs.save(upload_file.name, upload_file)
+        context['url'] = fs.url(name)
+        image = fs.open(upload_file.name)
+        context['image'] = image
+
     return render(request, 'accounts/audit_form.html', context)
 
 @login_required(login_url='login')
@@ -160,8 +168,6 @@ class tenantchartview(TemplateView):
     #view for tenants graph
     template_name='accounts/chart.html'
     
-    
-
     def get_context_data(self,**kwargs):
         context=super().get_context_data(**kwargs)
         context["qs"]= tenant_score.objects.all()

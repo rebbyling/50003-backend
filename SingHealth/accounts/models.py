@@ -42,12 +42,8 @@ class Audit(models.Model):
     staff = models.ForeignKey(Staff, null=True, on_delete=models.SET_NULL)
     #score = models.FloatField(null=True)
     comment = models.TextField(blank=True)
+    actual_img = models.ImageField(upload_to = 'media/')
     #upload_file = models.ImageField(null=True,blank=True)
-
-
-
-
-
 
 class tenant_score(models.Model):
     #some dummy model to work with the graph , the checklist model should be here instead  
@@ -56,6 +52,13 @@ class tenant_score(models.Model):
     
     def __str__(self):
         return"{}-{}".format(self.name,self.score)
+
+class Image(models.Model):
+    #image_name = models.CharField(max_length=200)
+    actual_img = models.ImageField(upload_to ='images/')
+
+    def __str__(self):
+        return self.actual_img
          
 
 
