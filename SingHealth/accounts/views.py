@@ -7,7 +7,7 @@ from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group, User
-from .forms import AuditForm, CreateUserForm
+from .forms import AuditForm, CreateUserForm ,ScoreForm
 from .filters import AuditFilter
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import TemplateView
@@ -15,6 +15,7 @@ from .decorators import  unauthenticated_user, allowed_users,admin_only
 import xlwt
 from django.core.mail import send_mail, EmailMessage
 from SingHealth.settings import EMAIL_HOST_USER
+
 
 import datetime
 
@@ -170,7 +171,7 @@ class tenantchartview(TemplateView):
     
     def get_context_data(self,**kwargs):
         context=super().get_context_data(**kwargs)
-        context["qs"]= tenant_score.objects.all()
+        context["qs"]= checklist.objects.all()
         ## this qs will be passed into the chart.html template , the model used will be changed with sky's model, this model is empty and does not have any data, hence the graph displays nothing
         ##url link is /chart/
         ##
@@ -191,14 +192,15 @@ def export_excel(request):
     font_style=xlwt.XFStyle()
     #making the first row bold
 
-    columns=['Name','Score'] ##the header names of the column what should be exported?
+    columns=['Tenant','Score'] ##the header names of the column what should be exported?
 
     for column_number in range(len(columns)):
         ws.write(row_num,column_number,columns[column_number],font_style )
         #writing the name of the contents into the column header  into the workbook in 135 
     font_style=xlwt.XFStyle()
 
-    rows = tenant_score.objects.all().values_list('name','score')
+    #rows = tenant_score.objects.all().values_list('name','score')
+    rows = tenant_score.objects.all().values_list('tenant.name','score')
 
     for row in rows:
         row_num+=1
@@ -248,3 +250,37 @@ def send_plain_mail(request):
 @login_required(login_url='login')
 def email(request):
     return render(request,"accounts/email.html")
+
+
+
+
+#def calculate(request):
+    #form=ScoreForm(request.POST)
+    #formc = ScoreForm(request.POST)
+    #if request.method=="POST":
+        #checked = form.cleaned_data['items']
+        #score = checked.count()
+        #score_object = ChecklistScore(score = score)
+        #score_object.save()
+        #score_object.checked = list(checked.values_list('description', flat=True))
+        #score_object.unchecked = list(set(formc.fields['items'].queryset.values_list('description', flat=True)) - set(score_object.checked))
+        #score_object.save()
+        #context['score'] = score
+        #context['checked'] = score_object.checked
+        #context['test'] = score_object.unchecked
+    #return redirect('http://127.0.0.1:8000/checklist/')
+def checklist_view(request):
+    context={}
+    if request.method =='POST':
+        form =ScoreForm(request.POST)
+        if form.is_valid():
+            instance=form.save(commit=False)
+            instance.Staff=request.user
+            instance.save()
+            return redirect('http://127.0.0.1:8000/checklist/')
+    else:
+        form=ScoreForm()
+    context['form']=form
+    return render(request,"accounts/audit_form.html",context)
+
+

@@ -239,3 +239,35 @@ img.plusbtn {
     font-family: "Poppins", sans-serif;
 }
 
+label {
+  display: block;
+  width: 100%;
+}
+
+input[type=checkbox] {
+  margin: 20px;
+  transform: scale(2.5);
+}
+
+ul.errorlist {
+  color: red;
+}
+
+
+.logout {
+  border-color:#7df0ff;
+  border-style: solid;
+  border-width: 8px;
+  padding: 1rem 2rem;
+  margin-top: 20px;
+  position: absolute;
+  bottom:200px;
+  right: 50px;
+  border-radius: 50px;
+  background-color: #7df0ff;
+  color: #4460a9;
+  text-decoration: none;
+  box-shadow: 0px 0px 20px rgb(139, 139, 139);
+  font-size: 2rem;
+    font-family: "Poppins", sans-serif;
+}

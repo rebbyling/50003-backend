@@ -1,10 +1,21 @@
 {% extends 'accounts/main.html' %}
+{% load static %} 
 {% block content %}
-    <div>
-        <h3>Tenant Only</h3>
+
+
+<html>
+  <head>
+    <title>Tenant Details</title>
+    
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap"
+      rel="stylesheet"
+    /></head>
+    <div>{% for i in audits %}
+        <h1>{{ i.tenant.name }}</h1>{% endfor %}
         <table class="">
       <tr>
-        <th>Tenant Name</th>
+        {% comment %} <th>Tenant Name</th> {% endcomment %}
         <th>Status</th>
           <th>Timestamp Track</th>
           <th>Comment</th>
@@ -13,7 +24,7 @@
       </tr>
             {% for i in audits %}
       <tr>
-        <td>{{ i.tenant.name }}</td>
+        {% comment %} <td>{{ i.tenant.name }}</td> {% endcomment %}
         <td>{{ i.status }}</td>
       <td>{{ i.date_audited }}</td>
       <td>{{ i.comment }}</td>
@@ -25,8 +36,8 @@
       {% endif %}
       </tr>
             {% endfor %}
-    <a class="btn btn-sm btn-danger" href="{% url 'logout' %}">Logout</a>
+    
 
 
-  </div>
-{% endblock %}
+  </div><a class="logout" href="{% url 'logout' %}">Logout</a>
+</html>{% endblock %}
