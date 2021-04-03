@@ -8,6 +8,7 @@ pip3 install django_filter
 python -m pip install Pillow
 pip3 install django-multiselectfield
 pip3 install xlwt
+pip3 install django-picklefield
 
 #run the server
 python3 manage.py runserver
