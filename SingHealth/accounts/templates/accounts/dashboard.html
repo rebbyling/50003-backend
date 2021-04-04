@@ -45,6 +45,7 @@
           <th>Status</th>
 
           <th>View</th>
+          <th>Email</th>
         </tr>
         {% for i in audits %}
         <tr>
@@ -56,6 +57,7 @@
           <td>
             <a class="updateButton" href="{% url 'create_audit' %}">Update</a>
           </td>
+          <td><a class="updateButton" href="{% url 'plain_email' %}">email</a></td>
           {% endif %}
         </tr>
         {% endfor %}

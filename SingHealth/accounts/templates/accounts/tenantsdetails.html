@@ -29,8 +29,8 @@
         
         <table>
             <tr>
-                <th>Date</th>
                 <th>ID</th>
+                <th>Date</th>
                 <th>Conducted By</th>
                 <th>Score</th>
                 {% comment %} <th>Comment(Score)</th> {% endcomment %}
@@ -38,8 +38,8 @@
             </tr>
             {% for i in audits %}
                 <tr>
-                    <td>{{ i.date_audited }}</td>
                     <td>{{ i.pk }}</td>
+                    <td>{{ i.date_audited }}</td>    
                     <td>{{ i.staff }}</td>
                     <td>{{ i.score }}</td>
                     {% comment %} <td>{{ i.comment }}</td> 

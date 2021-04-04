@@ -20,6 +20,7 @@
         <th>Auditor</th>
         <th>Date</th>
         <th>Done</th>
+        <th>Email</th>
       </tr>
       {% for t in audits %}
       <tr>
@@ -27,6 +28,7 @@
         <td>{{t.staff}}</td>
         <td>{{t.date_audited}}</td>
         <td>{{t.status}}</td>
+        <td><a class="updateButton" href="{% url 'plain_email' %}">email</a></td>
       </tr>
       {% endfor %}
     </table>

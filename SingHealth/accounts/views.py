@@ -102,13 +102,14 @@ def staff(request, pk):
 @login_required(login_url='login')
 @admin_only
 def createAudit(request):
-    form = AuditForm()
+    form=AuditForm()
     if request.method == 'POST':
         form = AuditForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('/')
     context = {'form': form}
+
     return render(request, 'accounts/audit_form.html', context)
 
 @login_required(login_url='login')
