@@ -182,8 +182,7 @@ class tenantchartview(TemplateView):
         ##
         return context 
 
-@login_required(login_url='login')
-@admin_only
+
 def export_excel(request):
     response = HttpResponse(content_type='application/ms-excel')
     response['Content-Disposition']='attachment; filename = "SinghealthAudit'+str(datetime.datetime.now())+'.xls"'
@@ -197,7 +196,7 @@ def export_excel(request):
     font_style=xlwt.XFStyle()
     #making the first row bold
 
-    columns=['Tenant','Score'] ##the header names of the column what should be exported?
+    columns=['Tenant','Score','Date Audited'] ##the header names of the column what should be exported?
 
     for column_number in range(len(columns)):
         ws.write(row_num,column_number,columns[column_number],font_style )
@@ -205,7 +204,7 @@ def export_excel(request):
     font_style=xlwt.XFStyle()
 
     #rows = tenant_score.objects.all().values_list('name','score')
-    rows = tenant_score.objects.all().values_list('tenant.name','score')
+    rows = checklist.objects.all().values_list('tenant__name','score','date_audited')#checklist attribute foreign key tenant .name tenant_name = checklist.tenant.name
 
     for row in rows:
         row_num+=1
