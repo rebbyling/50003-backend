@@ -1,7 +1,6 @@
 
 {% extends 'accounts/main.html' %} {% block content %}
 
-<br />
 <div>
   <h1>HOME</h1>
   <h4>View your summary here</h4>
@@ -14,21 +13,21 @@
         <th>Tenant Name</th>
         <th>Status</th>
         <th>Update</th>
-          <th>View</th>
+        <th>View</th>
 
       </tr>
       {% for i in tenants %}
       <tr>
-        <td>{{ i.name }}</td>
+        <td>{{ i.tenant.name }}</td>
         <td>{{ i.status }}</td>
-        {% if i.status in "Pending" %}
+        
         <td>
-          <a class="updateButton" href="{% url 'create_audit' %}">Start</a>
+          <a class="updateButton" href="{% url 'checklist' %}">Start</a>
 
         </td>
             <td><a class="updateButton" href="{% url 'tenantsDetail' i.pk %}">Details</a></td>
 
-        {% endif %}
+
       </tr>
 
       {% endfor %}
@@ -44,21 +43,15 @@
           <th>Date Audited</th>
           <th>Status</th>
 
-          <th>View</th>
           <th>Email</th>
         </tr>
-        {% for i in audits %}
+        {% for i in tenants %}
         <tr>
-          <td>{{ i.tenant }}</td>
+          <td>{{ i.tenant.name }}</td>
           <td>{{ i.date_audited }}</td>
           <td>{{ i.status }}</td>
-
-          {% if i.status in "Fail" %}
-          <td>
-            <a class="updateButton" href="{% url 'create_audit' %}">Update</a>
-          </td>
+          
           <td><a class="updateButton" href="{% url 'plain_email' %}">email</a></td>
-          {% endif %}
         </tr>
         {% endfor %}
       </table>

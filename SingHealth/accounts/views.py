@@ -65,11 +65,10 @@ def logoutUser(request):
 
 @login_required(login_url='login')
 @admin_only
-
 def home(request):
     audits = Audit.objects.all()
     #staff = Staff.objects.all()
-    tenants = Tenant.objects.all()
+    tenants = checklist.objects.all()
 
     #total_audits = audits.count()
     #passed = audits.filter(status='Pass').count()
@@ -77,6 +76,17 @@ def home(request):
     context = {'audits': audits, 'tenants':tenants}
 
     return render(request, 'accounts/dashboard.html', context)
+#def home(request):
+    #audits = Audit.objects.all()
+    #staff = Staff.objects.all()
+   # tenants = Tenant.objects.all()
+
+    #total_audits = audits.count()
+    #passed = audits.filter(status='Pass').count()
+    #pending = audits.filter(status='Pending').count()
+    #context = {'audits': audits, 'tenants':tenants}
+
+   # return render(request, 'accounts/dashboard.html', context)
 
 
 @login_required(login_url='login')
@@ -272,10 +282,10 @@ def checklist_view(request):
             instance=form.save(commit=False)
             instance.Staff=request.user
             instance.save()
-            return redirect('http://127.0.0.1:8000/checklist/')
+            return redirect('http://127.0.0.1:8000/')
     else:
         form=ScoreForm()
     context['form']=form
-    return render(request,"accounts/audit_form.html",context)
+    return render(request,"accounts/checklistform.html",context)
 
 

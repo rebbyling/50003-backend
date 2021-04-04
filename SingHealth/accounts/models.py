@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from picklefield.fields import PickledObjectField
 from django.core.validators import MaxValueValidator,MinValueValidator
 from multiselectfield import MultiSelectField
+import datetime
 
 # Create your models here.
 class Staff(models.Model):
@@ -25,6 +26,7 @@ class Tenant(models.Model):
 
     )
     name = models.CharField(max_length=100)
+    #status = models.ForeignKey(checklist,on_delete = models.CASCADE)
     status = models.CharField(max_length=50, choices=STATUS, blank=True)
     category = models.CharField(max_length=100)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -83,11 +85,18 @@ class checklist(models.Model):
         ('Rats','Rats'),
         ('Safety Hazards','Safety Hazards'),
     )
+    STATUS = (
+    ('PASS','PASS'),
+    ('FAIL','FAIL'),
+    )
     tenant = models.ForeignKey(Tenant,null=True, on_delete = models.CASCADE, related_name='tenantchecklistscore')
     #items=models.ManyToManyField(checklistconditions,related_name="checklist")
     Staff=models.ForeignKey(User,null=True, on_delete = models.CASCADE, related_name='staffscore')
     score = models.PositiveIntegerField(default=1,validators=[MaxValueValidator(10),MinValueValidator(1)])##input score for tenant
-    checklist_items =MultiSelectField(choices=VIOLATION,default=True)
+    status = models.CharField(max_length=20,choices=STATUS,default=True)
+    checklist_items =MultiSelectField(choices=VIOLATION,default=True,null=True,blank=True)
+    date_audited = models.DateTimeField(default=datetime.datetime.now)
+  
     def __str__(self):
         return self.tenant.name + " has scored " + str(self.score)
 
