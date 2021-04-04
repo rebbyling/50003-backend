@@ -44,9 +44,7 @@
                     <td>{{ i.score }}</td>
                     {% comment %} <td>{{ i.comment }}</td> 
                     <td>
-                        
                             <button  class="Gallery" onclick = "location.href = ' '">Details</button>
-                        
                     </td>{% endcomment %}
                 </tr>
             {% endfor %}
@@ -54,6 +52,12 @@
 
         <h2>Photos Taken</h2>
         <h4>i will need someone to help populate the uploaded images here :''-)</h4>
+        {% for image in images %}
+            <div class="col-md-4">
+                    {{ image.tenant.name }}
+                     <img src="{{ image.actual_img.url }}" class="img-responsive" style="width: 100%; float: left; margin-right: 10px;" />
+            </div>
+        {% endfor %}
 </html>
 
 {% endblock %}

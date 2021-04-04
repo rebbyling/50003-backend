@@ -15,4 +15,4 @@ class AuditFilter(django_filters.FilterSet):
     class Meta:
         model = Audit
         fields = '__all__'
-        exclude = ['date_audited','status', 'staff','comment']
+        exclude = ['date_audited','status', 'staff','comment','actual_img']

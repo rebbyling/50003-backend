@@ -6,8 +6,9 @@
   </head>
 <div>
     <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <input class="uploadImage" type="file" name="document">
+      {% csrf_token %}
+      {{ form.as_p }}
+    <!-- <input class="uploadImage" type="file" name="document"> -->
     <button class="uploadSubmit" type="submit">Upload</button>
     </form>
     {% if url %}

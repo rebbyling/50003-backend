@@ -23,7 +23,6 @@ class Tenant(models.Model):
         ('Pending', 'Pending'),
         ('Pass', 'Pass'),
         ('Fail', 'Fail'),
-
     )
     name = models.CharField(max_length=100)
     #status = models.ForeignKey(checklist,on_delete = models.CASCADE)
@@ -31,7 +30,9 @@ class Tenant(models.Model):
     category = models.CharField(max_length=100)
     date_created = models.DateTimeField(auto_now_add=True)
     description = models.CharField(max_length=100, blank=True)
+    actual_img = models.ImageField(upload_to ='images/')
     #score = models.FloatField(null=True)
+    #checklist = models.ForeignKey(checklist,null=True,on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.name
@@ -42,7 +43,6 @@ class Audit(models.Model):
         ('Pending', 'Pending'),
         ('Pass', 'Pass'),
         ('Fail', 'Fail'),
-
     )
     date_audited = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=50, choices=STATUS)
@@ -50,12 +50,8 @@ class Audit(models.Model):
     staff = models.ForeignKey(Staff, null=True, on_delete=models.SET_NULL)
     #score = models.FloatField(null=True)
     comment = models.TextField(blank=True)
+    #actual_img = models.ImageField(upload_to = 'media/')
     #upload_file = models.ImageField(null=True,blank=True)
-
-
-
-
-
 
 class tenant_score(models.Model):
     #some dummy model to work with the graph , the checklist model should be here instead  
@@ -65,9 +61,13 @@ class tenant_score(models.Model):
     def __str__(self):
         return"{}-{}".format(self.name,self.score)
 
+class Image(models.Model):
+    #image_name = models.CharField(max_length=200)
+    tenant = models.ForeignKey(Tenant, null=True, on_delete=models.SET_NULL)
+    actual_img = models.ImageField(upload_to ='images/')
 
-
-
+    """ def __str__(self):
+        return self.actual_img """
 
 #class checklistconditions(models.Model):
     #description = models.CharField(max_length=20,null=True,default="null")
@@ -94,8 +94,9 @@ class checklist(models.Model):
     Staff=models.ForeignKey(User,null=True, on_delete = models.CASCADE, related_name='staffscore')
     score = models.PositiveIntegerField(default=1,validators=[MaxValueValidator(10),MinValueValidator(1)])##input score for tenant
     status = models.CharField(max_length=20,choices=STATUS,default=True)
-    checklist_items =MultiSelectField(choices=VIOLATION,default=True,null=True,blank=True)
+    checklist_items = MultiSelectField(choices=VIOLATION,default=True,null=True,blank=True)
     date_audited = models.DateTimeField(default=datetime.datetime.now)
+    #actual_img = models.ImageField()
   
     def __str__(self):
         return self.tenant.name + " has scored " + str(self.score)

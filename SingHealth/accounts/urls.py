@@ -27,8 +27,6 @@ urlpatterns = [
     path('checklist/',views.checklist_view,name='checklist'),
     #path('calculate',views.calculate,name='calculate'),
 
-
-
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
