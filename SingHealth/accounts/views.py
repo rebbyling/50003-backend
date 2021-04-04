@@ -303,7 +303,7 @@ def checklist_view(request):
             image = fs.open(upload_file.name)
             context['image'] = image
             context['form']= form """
-            return redirect('http://127.0.0.1:8000/upload_image')
+            return redirect('http://127.0.0.1:8000/')
     else:
         form=ScoreForm()
     context['form']=form
