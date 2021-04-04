@@ -1,4 +1,4 @@
-{% extends 'accounts/main.html'%} 
+{% comment %} {% extends 'accounts/main.html'%} 
 {% load static %} 
 {% block content %}
 <!DOCTYPE html>
@@ -11,18 +11,15 @@
 <h1>AUDIT FOR</h1>
 {% comment %} <a class="viewDetails" href="">View Tenant Details</a> 
 <h4>for Tenant A</h4>
-{% endcomment %}
-<div >
 
-<form method ='POST'>
-{% csrf_token %}
-{{ form.as_p }}
-</form>
+<div > {% endcomment %}
+
+{% include 'accounts/checklistform.html' %}
 
  </div>{% comment %}
 <h3>Health</h3>
 <div class="tableContainer">checklist table to implement</div> {% endcomment %}
-<h3>Uploaded Photos</h3>
+{% comment %} <h3>Uploaded Photos</h3>
 <div class="padding"> {% include 'accounts/upload_image.html' %}</div>
 <div class="centre">
 <form><input type='submit' value='COMPLETE AUDIT' class="completeAudit"></input></form>
@@ -30,4 +27,4 @@
 </div>
 
 </body>
-{% endblock %}
+{% endblock %} {% endcomment %}

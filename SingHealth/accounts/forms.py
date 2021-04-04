@@ -25,7 +25,8 @@ from django.utils.translation import gettext_lazy as _
 class ScoreForm(forms.ModelForm):
     class Meta:
         model = checklist
-        fields = ['tenant','checklist_items','score']
+        fields = ['tenant','checklist_items','score','status']
+        
     
     #def __init__(self, *args, **kwargs):
         #super().__init__(*args, **kwargs)##model forms init method is being called

@@ -1,5 +1,24 @@
+{% extends 'accounts/main.html'%} 
+{% load static %} 
+{% block content %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Audit Form</title>
+  </head>
+</html>
+<body>
+<h1>AUDIT FOR</h1>
 <form method ='POST'>
 {% csrf_token %}
 {{ form.as_p }}
-<input type='submit' value='Save'/>
+<div class="centre">
+<input type='submit' value='COMPLETE AUDIT' class="completeAudit"/>
+
+</div>
+
+<h3>Uploaded Photos</h3>
+<div class="padding"> {% include 'accounts/upload_image.html' %}</div>
+
 </form>
+</body>{% endblock %}

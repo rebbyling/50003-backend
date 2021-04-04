@@ -62,11 +62,10 @@ def logoutUser(request):
 
 @login_required(login_url='login')
 @admin_only
-
 def home(request):
     audits = Audit.objects.all()
     #staff = Staff.objects.all()
-    tenants = Tenant.objects.all()
+    tenants = checklist.objects.all()
 
     #total_audits = audits.count()
     #passed = audits.filter(status='Pass').count()
@@ -74,6 +73,17 @@ def home(request):
     context = {'audits': audits, 'tenants':tenants}
 
     return render(request, 'accounts/dashboard.html', context)
+#def home(request):
+    #audits = Audit.objects.all()
+    #staff = Staff.objects.all()
+   # tenants = Tenant.objects.all()
+
+    #total_audits = audits.count()
+    #passed = audits.filter(status='Pass').count()
+    #pending = audits.filter(status='Pending').count()
+    #context = {'audits': audits, 'tenants':tenants}
+
+   # return render(request, 'accounts/dashboard.html', context)
 
 
 @login_required(login_url='login')
@@ -99,7 +109,7 @@ def staff(request, pk):
 @login_required(login_url='login')
 @admin_only
 def createAudit(request):
-    form = AuditForm()
+    form=AuditForm()
     if request.method == 'POST':
         form = AuditForm(request.POST)
         if form.is_valid():
@@ -107,7 +117,7 @@ def createAudit(request):
             return redirect('/')
     context = {'form': form}
 
-    if request.method=="POST":
+    """ if request.method=="POST":
         upload_file = request.FILES['document']
         print(upload_file.name)
         print(upload_file.size)
@@ -115,7 +125,7 @@ def createAudit(request):
         name = fs.save(upload_file.name, upload_file)
         context['url'] = fs.url(name)
         image = fs.open(upload_file.name)
-        context['image'] = image
+        context['image'] = image """
 
     return render(request, 'accounts/audit_form.html', context)
 
@@ -277,10 +287,10 @@ def checklist_view(request):
             instance=form.save(commit=False)
             instance.Staff=request.user
             instance.save()
-            return redirect('http://127.0.0.1:8000/checklist/')
+            return redirect('http://127.0.0.1:8000/')
     else:
         form=ScoreForm()
     context['form']=form
-    return render(request,"accounts/audit_form.html",context)
+    return render(request,"accounts/checklistform.html",context)
 
 
