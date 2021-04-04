@@ -7,7 +7,7 @@ from django.core.files.storage import FileSystemStorage
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group, User
-from .forms import AuditForm, CreateUserForm ,ScoreForm
+from .forms import AuditForm, CreateUserForm ,ScoreForm, ImageForm
 from .filters import AuditFilter
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import TemplateView
@@ -117,7 +117,7 @@ def createAudit(request):
             return redirect('/')
     context = {'form': form}
 
-    """ if request.method=="POST":
+    if request.method=="POST":
         upload_file = request.FILES['document']
         print(upload_file.name)
         print(upload_file.size)
@@ -125,7 +125,7 @@ def createAudit(request):
         name = fs.save(upload_file.name, upload_file)
         context['url'] = fs.url(name)
         image = fs.open(upload_file.name)
-        context['image'] = image """
+        context['image'] = image
 
     return render(request, 'accounts/audit_form.html', context)
 
@@ -142,19 +142,24 @@ def updateAudit(request):
 @login_required(login_url='login')
 def uploadImage(request):
     context={}
+    form = ImageForm()
     if request.method=="POST":
-        upload_file = request.FILES['document']
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+        else:
+            form = ImageForm()
+        """ upload_file = request.FILES['document']
         fs = FileSystemStorage()
         name = fs.save(upload_file.name, upload_file)
-        context['url'] = fs.url(name)
-
+        context['url'] = fs.url(name) """
+    context['form'] = form
     return render(request, 'accounts/upload_image.html',context)
 
 @login_required(login_url='login')
 def userPage(request):
     audits = Audit.objects.all()
-
-
     return render(request,'accounts/tenant_only.html',{'audits':audits})
 
 #def deleteTenant(request):
@@ -226,9 +231,12 @@ def export_excel(request):
 def audit_details(request, pk):
     tenants = Tenant.objects.get(id=pk)
     audits = tenants.audit_set.all()
+    image = Image.objects.filter(tenant = tenants)
     context = {
             'tenants' : tenants,
-            'audits' : audits
+            'audits' : audits,
+            'checklist' : checklist,
+            'images' : image
             }
     return render(request,'accounts/tenantsdetails.html', context)
     
@@ -261,9 +269,6 @@ def send_plain_mail(request):
 def email(request):
     return render(request,"accounts/email.html")
 
-
-
-
 #def calculate(request):
     #form=ScoreForm(request.POST)
     #formc = ScoreForm(request.POST)
@@ -279,18 +284,31 @@ def email(request):
         #context['checked'] = score_object.checked
         #context['test'] = score_object.unchecked
     #return redirect('http://127.0.0.1:8000/checklist/')
+
 def checklist_view(request):
     context={}
-    if request.method =='POST':
+    form = ScoreForm()
+    if request.method == 'POST':
         form =ScoreForm(request.POST)
         if form.is_valid():
             instance=form.save(commit=False)
             instance.Staff=request.user
             instance.save()
-            return redirect('http://127.0.0.1:8000/')
+
+            """ upload_file = request.FILES['document']
+            print(upload_file.name)
+            print(upload_file.size)
+            fs = FileSystemStorage()
+            name = fs.save(upload_file.name, upload_file)
+            context['url'] = fs.url(name)
+            image = fs.open(upload_file.name)
+            context['image'] = image
+            context['form']= form """
+            return redirect('http://127.0.0.1:8000/upload_image')
     else:
         form=ScoreForm()
     context['form']=form
     return render(request,"accounts/checklistform.html",context)
+    
 
 

@@ -2,7 +2,7 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Audit, Image
+from .models import Audit, Image, Tenant
 from django import forms
 from .models import checklist
 from django.utils.translation import gettext_lazy as _
@@ -49,4 +49,4 @@ class CreateUserForm(UserCreationForm):
 class ImageForm(forms.ModelForm): 
     class Meta: 
         model = Image
-        fields = ['actual_img'] 
+        fields = ['tenant','actual_img']
