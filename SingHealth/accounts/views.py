@@ -156,7 +156,7 @@ def uploadImage(request):
         context['url'] = fs.url(name) """
     context['form'] = form
     return render(request, 'accounts/upload_image.html',context)
-
+    
 @login_required(login_url='login')
 def userPage(request):
     audits = Audit.objects.all()

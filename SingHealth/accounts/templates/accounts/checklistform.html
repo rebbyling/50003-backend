@@ -12,27 +12,11 @@
 <form method ='POST' enctype="multipart/form-data">
   {% csrf_token %}
   {{ form.as_p }}
-  <!-- <input class="uploadImage" type="file" name="document">
-  <div class="centre"> -->
+<div class="max-width">
+  <a class="uploadImage" href="/upload_image">Upload Photos ></a>
+  </div>
+  <div class="centre"> 
    <input type='submit' value='COMPLETE AUDIT' class="completeAudit"/>
   </div>
 </form>
-
-<h3>Uploaded Photos</h3>
-<h4>whelp need help with fixing the UI</h4>
-<a href="/upload_image">Upload Image Button</a>
-<!-- <div class="padding"> 
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <input class="uploadImage" type="file" name="document">
-    <button class="uploadSubmit" type="submit">Upload</button>
-    </form>
-     {% if url %}
-        <p>Uploaded file: <a href="{{ url }}">{{ url }}</a></p>
-    {% endif %}
-  {% include 'accounts/upload_image.html' %}
-
-  </div>
-
-</form> -->
 </body>{% endblock %}

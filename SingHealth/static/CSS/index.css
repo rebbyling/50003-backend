@@ -7,10 +7,20 @@ body {
   height:90%}
 
 .uploadImage {
-  margin-top: 30px;
-  text-align: left;
-  padding: 30px;
-  box-sizing: inherit;
+  border-color:#4460a9;
+  width: 98%;
+  border-style: solid;
+  border-width: 8px;
+  padding: 3rem 3rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  border-radius: 50px;
+  background-color: #ffffff;
+  color: #4460a9;
+  font-size: 2rem;
+  font-family: "Poppins", sans-serif;
+  float: left;
+  display: block;
 }
 
 button.Gallery {
@@ -203,17 +213,25 @@ img.plusbtn {
   color: #ff7c5e;
 }
 
+.max-width {
+  width: 100%;
+  overflow: auto;
+}
+
 .uploadSubmit {
   border-color:#4460a9;
   border-style: solid;
   border-width: 8px;
   padding: 1rem 2rem;
-  margin: 20px;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
   border-radius: 50px;
   background-color: #ffffff;
   color: #4460a9;
   font-size: 2rem;
   font-family: "Poppins", sans-serif;
+  float: center;
+  display: block;
 }
 
 .centre {

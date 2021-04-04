@@ -28,12 +28,10 @@
         <td>{{ i.status }}</td>
       <td>{{ i.date_audited }}</td>
       <td>{{ i.comment }}</td>
-      {% if i.status in "Fail" %}
         <td>
           <a class="updateButton" href="{% url 'upload_image' %}">Update</a>
 
         </td>
-      {% endif %}
       </tr>
             {% endfor %}
     

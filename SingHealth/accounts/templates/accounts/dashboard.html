@@ -16,7 +16,8 @@
         <th>View</th>
 
       </tr>
-      {% for i in tenants %}
+      <h4>i realised for this part it should not be looping thru the checklist model (the for i in tenants). it should show the all the tenants, like how the search bar shows the tenant on click. </h4>
+      {% for i in audits %}
       <tr>
         <td>{{ i.tenant.name }}</td>
         <td>{{ i.status }}</td>
