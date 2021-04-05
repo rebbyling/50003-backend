@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm , Textarea
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
@@ -25,7 +25,10 @@ from django.utils.translation import gettext_lazy as _
 class ScoreForm(forms.ModelForm):
     class Meta:
         model = checklist
-        fields = ['tenant','checklist_items','score','status']
+        fields = ['tenant','checklist_items','score','status','comment']
+        widgets = {
+          'comment': Textarea(attrs={'rows':3, 'cols':10}),
+        }
         
     
     #def __init__(self, *args, **kwargs):

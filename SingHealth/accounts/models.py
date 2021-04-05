@@ -88,15 +88,19 @@ class checklist(models.Model):
     STATUS = (
     ('PASS','PASS'),
     ('FAIL','FAIL'),
+    #('RECTIFICATIONS PENDING','RECTIFICATIONS PENDING')
     )
     tenant = models.ForeignKey(Tenant,null=True, on_delete = models.CASCADE, related_name='tenantchecklistscore')
     #items=models.ManyToManyField(checklistconditions,related_name="checklist")
     Staff=models.ForeignKey(User,null=True, on_delete = models.CASCADE, related_name='staffscore')
     score = models.PositiveIntegerField(default=1,validators=[MaxValueValidator(10),MinValueValidator(1)])##input score for tenant
-    status = models.CharField(max_length=20,choices=STATUS,default=True)
+    status = models.CharField(max_length=22,choices=STATUS,default=True)
     checklist_items = MultiSelectField(choices=VIOLATION,default=True,null=True,blank=True)
     date_audited = models.DateTimeField(default=datetime.datetime.now)
     #actual_img = models.ImageField()
+    comment = models.TextField(blank=True,null=True)
+    
+
   
     def __str__(self):
         return self.tenant.name + " has scored " + str(self.score)
