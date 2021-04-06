@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
 from django.contrib.auth import authenticate, login, logout
 from django.core.files.storage import FileSystemStorage
@@ -38,6 +38,9 @@ def registerPage(request):
 
 @unauthenticated_user
 def loginPage(request):
+    if request.method == 'GET':
+        request.session['login_from'] = request.META.get('HTTP_REFERER', '/')
+
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -147,7 +150,8 @@ def uploadImage(request):
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('/')
+            # next = request.POST.get('next', '/')
+            return HttpResponseRedirect(request.session['login_from'])
         else:
             form = ImageForm()
         """ upload_file = request.FILES['document']

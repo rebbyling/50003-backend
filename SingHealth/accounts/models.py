@@ -65,6 +65,8 @@ class Image(models.Model):
     #image_name = models.CharField(max_length=200)
     tenant = models.ForeignKey(Tenant, null=True, on_delete=models.SET_NULL)
     actual_img = models.ImageField(upload_to ='images/')
+    date_added = models.DateField(auto_now_add=True)
+    time_added = models.TimeField(auto_now_add=True)
 
     """ def __str__(self):
         return self.actual_img """

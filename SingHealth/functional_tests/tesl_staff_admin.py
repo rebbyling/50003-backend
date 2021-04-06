@@ -25,11 +25,8 @@ class TestStaffPage(LiveServerTestCase):
 
         #pre-login
         self.browser.find_element_by_id('id_username').send_keys('sky_test')
-        time.sleep(0.5)
         self.browser.find_element_by_id('id_password').send_keys('testing12#')
-        time.sleep(0.5)
         self.browser.find_element_by_xpath('//input[@value="Log in"]').click()
-        time.sleep(1)
         
         #create staff user
         self.staff = User.objects.create_user(username = 'sky', is_active = True, password = 'testing12#')
@@ -67,8 +64,8 @@ class TestStaffPage(LiveServerTestCase):
         #Staff
         select = Select(self.browser.find_element_by_id('id_staff'))
         select.select_by_visible_text('LI MEIXUAN')
-        #Upload Image
-        self.browser.find_element_by_id('id_actual_img').send_keys(os.getcwd()+ "/image/dummy.jpg")
+        #Upload Image - seems removed by me
+        #self.browser.find_element_by_id('id_actual_img').send_keys(os.getcwd()+ "/image/dummy.jpg")
         self.browser.find_element_by_name('_save').click()
 
         self.browser.get("http://127.0.0.1:8000/admin")
@@ -78,7 +75,10 @@ class TestStaffPage(LiveServerTestCase):
         select.select_by_visible_text('Delete selected audits')
         
         #select audit to be deleted
-        self.browser.find_element_by_xpath('//input[@value="5"]').click()
+
+        #remember to change this
+        
+        self.browser.find_element_by_xpath('//input[@value="11"]').click()
         #click the Go button
         self.browser.find_element_by_xpath('//button[@value="0"]').click()
         #oh im so sure i wanna delete u, bye friend
@@ -96,7 +96,7 @@ class TestStaffPage(LiveServerTestCase):
         select = Select(self.browser.find_element_by_xpath('//select[@name="action"]'))
         select.select_by_visible_text('Delete selected staffs')
         #select staff to be deleted
-        self.browser.find_element_by_xpath('//input[@value="11"]').click()
+        self.browser.find_element_by_xpath('//input[@value="12"]').click()
         #click the Go button
         self.browser.find_element_by_xpath('//button[@value="0"]').click()
         #confirm delete
@@ -114,7 +114,7 @@ class TestStaffPage(LiveServerTestCase):
         select = Select(self.browser.find_element_by_xpath('//select[@name="action"]'))
         select.select_by_visible_text('Delete selected tenant_scores')
         #select entry to be deleted
-        self.browser.find_element_by_xpath('//input[@value="4"]').click()
+        self.browser.find_element_by_xpath('//input[@value="8"]').click()
         #click the Go button
         self.browser.find_element_by_xpath('//button[@value="0"]').click()
         #confirm delete
@@ -132,13 +132,17 @@ class TestStaffPage(LiveServerTestCase):
         description = "This is for testing purpose!"
         self.browser.find_element_by_id('id_category').send_keys('Food')
         self.browser.find_element_by_id('id_description').send_keys(description)
+        #upload image
+        self.browser.find_element_by_id('id_actual_img').send_keys(os.getcwd()+ "/image/dummy.jpg")
         #click save button
         self.browser.find_element_by_xpath('//input[@value="Save"]').click()
+        time.sleep(5)
+        #select = Select(self.browser.find_element_by_xpath('//select[@name="action"]'))
         #Select Action
         select = Select(self.browser.find_element_by_xpath('//select[@name="action"]'))
         select.select_by_visible_text('Delete selected tenants')
         #select tenant to be deleted
-        self.browser.find_element_by_xpath('//input[@value="3"]').click()
+        self.browser.find_element_by_xpath('//input[@value="8"]').click()
         #click the Go button
         self.browser.find_element_by_xpath('//button[@value="0"]').click()
         #confirm delete

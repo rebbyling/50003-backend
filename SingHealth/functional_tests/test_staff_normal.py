@@ -28,7 +28,6 @@ class TestStaffNormal(LiveServerTestCase):
         dummy_text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar odio non varius rhoncus. Praesent vitae efficitur urna. Proin feugiat dui ut scelerisque eleifend. In hac habitasse platea dictumst. Curabitur faucibus diam at elit cursus, non auctor tellus efficitur. Ut ut leo id neque egestas sollicitudin. Cras eu nunc tincidunt, pharetra libero quis, porta neque. Sed eu ultrices magna. Fusce facilisis vel leo a pretium. "
 
         self.browser.get("http://127.0.0.1:8000/mail")
-
         #fill in email
         self.browser.find_element_by_xpath('//input[@name="email"]').send_keys('jetxuen@outlook.com')
         #fill in subject
