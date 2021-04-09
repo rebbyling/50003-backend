@@ -29,20 +29,21 @@
         
         <table>
             <tr>
-                <th>ID</th>
+
                 <th>Date</th>
-                <th>Conducted By</th>
-                <th>Score</th>
+                <th>Comment</th>
+
+
                 {% comment %} <th>Comment(Score)</th> {% endcomment %}
                 {% comment %} <th>View</th> {% endcomment %}
             </tr>
-            {% for i in audits %}
+            {% for i in checklists %}
                 <tr>
-                    <td>{{ i.pk }}</td>
-                    <td>{{ i.date_audited }}</td>    
-                    <td>{{ i.staff }}</td>
-                    <td>{{ i.score }}</td>
-                    {% comment %} <td>{{ i.comment }}</td> 
+
+                    <td>{{ i.date_audited }}</td>
+                    <td>{{ i.comment }}</td>
+
+                    {% comment %} <td>{{ i.comment }}</td>
                     <td>
                             <button  class="Gallery" onclick = "location.href = ' '">Details</button>
                     </td>{% endcomment %}
@@ -53,7 +54,7 @@
         <h2>Photos Taken</h2>
         {% for image in images %}
             <div class="tableContainer">
-              <p style="display: block; width: 60%; height: auto; float: left; " >{{ image.date_added }} {{ image.time_added }}</p>
+              <p style="display: block; width: 60%; height: auto; float: left; " >{{ image.tenant.name }} {{ image.date_added }}</p>
               <img src="{{ image.actual_img.url }}" style="display: block; width: 60%; height: auto; float: left; margin: 3rem;" />
             </div>
         {% endfor %}

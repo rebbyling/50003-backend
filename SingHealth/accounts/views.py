@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from .models import *
 from django.contrib.auth import authenticate, login, logout
 from django.core.files.storage import FileSystemStorage
@@ -39,9 +39,6 @@ def registerPage(request):
 
 @unauthenticated_user
 def loginPage(request):
-    if request.method == 'GET':
-        request.session['login_from'] = request.META.get('HTTP_REFERER', '/')
-
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -156,8 +153,7 @@ def uploadImage(request):
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            # next = request.POST.get('next', '/')
-            return HttpResponseRedirect(request.session['login_from'])
+            return redirect('/')
         else:
             form = ImageForm()
         """ upload_file = request.FILES['document']
@@ -170,7 +166,8 @@ def uploadImage(request):
 
 @login_required(login_url='login')
 def userPage(request):
-    audits = Audit.objects.all()
+    audits = Tenant.objects.all()
+
     return render(request, 'accounts/tenant_only.html', {'audits': audits})
 
 
@@ -184,7 +181,9 @@ def userPage(request):
 
 def search(request):
     audits = Audit.objects.all()
+    #tenants = Tenant.objects.all()
     myFilter = AuditFilter(request.GET, queryset=audits)
+    #tenants = myFilter.qs
     audits = myFilter.qs
 
     context = {'audits': audits, 'myFilter': myFilter}
@@ -244,12 +243,15 @@ def audit_details(request, pk):
     tenants = Tenant.objects.get(id=pk)
     audits = tenants.audit_set.all()
     image = Image.objects.filter(tenant=tenants)
+    checklists = checklist.objects.all()
     context = {
+        'checklists':checklists,
         'tenants': tenants,
         'audits': audits,
         'checklist': checklist,
         'images': image
     }
+
     return render(request, 'accounts/tenantsdetails.html', context)
 
 
@@ -320,7 +322,7 @@ def checklist_view(request):
             image = fs.open(upload_file.name)
             context['image'] = image
             context['form']= form """
-            return redirect('http://127.0.0.1:8000/')
+            return redirect('http://127.0.0.1:8000/upload_image')
     else:
         form = ScoreForm()
     context['form'] = form

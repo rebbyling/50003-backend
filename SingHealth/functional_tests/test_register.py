@@ -12,43 +12,59 @@ class TestRegisterPage(LiveServerTestCase):
 
     def setUp(self):
         super(TestRegisterPage, self).setUp()
-        self.browser = webdriver.Chrome('functional_tests/chromedriver')
+        #emulate the phone
+        mobile_emulation = { "deviceName": "iPhone X" }
+
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
+
+        self.browser = webdriver.Chrome(executable_path = 'functional_tests/chromedriver',options=chrome_options)
+        self.browser.maximize_window()
 
     def tearDown(self):
         self.browser.close()
         super(TestRegisterPage, self).tearDown()
 
-    #It can only be ran once! change it
-    def test_register(self):
-
-        #can only run once
+    def test_register_successful(self):
         expected_url = "http://127.0.0.1:8000/login/"
         self.browser.get("http://127.0.0.1:8000/register/")
         
         #dummy testing data
-        username = 'def4'
+        username = 'Test1'
         email = 'abc@mail.com'
         password = 'testing123!'
         
         #fill in username
         self.browser.find_element_by_id('id_username').send_keys(username)
+        time.sleep(1)
+        
         #fill in email
         self.browser.find_element_by_id('id_email').send_keys(email)
+        time.sleep(1)
+
         #fill in password
         self.browser.find_element_by_id('id_password1').send_keys(password)
+        time.sleep(1)
+        
         #confirm password
         self.browser.find_element_by_id('id_password2').send_keys(password)
+        time.sleep(1)
+        
         #click regsiter button
         self.browser.find_element_by_name('register').click()
-        time.sleep(2)
+        time.sleep(3)
 
         #check if successfully register
         self.assertEquals(self.browser.current_url, expected_url)
 
         #go to login page and fill in username
         self.browser.find_element_by_name('username').send_keys(username)
+        time.sleep(1)
+
         #fill in password
         self.browser.find_element_by_name('password').send_keys(password)
+        time.sleep(1)
+        
         #click login button
         self.browser.find_element_by_name('login').click()
         time.sleep(2)
@@ -57,3 +73,39 @@ class TestRegisterPage(LiveServerTestCase):
         after_login_url = "http://127.0.0.1:8000/tenant_only/"
         self.assertEquals(self.browser.current_url, after_login_url)
 
+    def test_register_unsuccessful(self):
+        """ 
+        This test register with a registered username
+        """
+        expected_url = "http://127.0.0.1:8000/login/"
+        self.browser.get("http://127.0.0.1:8000/register/")
+        
+        #dummy testing data
+        username = 'Test1'
+        email = 'abc@mail.com'
+        password = 'testing123!'
+        
+        #fill in username
+        self.browser.find_element_by_id('id_username').send_keys(username)
+        time.sleep(1)
+        
+        #fill in email
+        self.browser.find_element_by_id('id_email').send_keys(email)
+        time.sleep(1)
+        
+        #fill in password
+        self.browser.find_element_by_id('id_password1').send_keys(password)
+        time.sleep(1)
+        
+        #confirm password
+        self.browser.find_element_by_id('id_password2').send_keys(password)
+        time.sleep(1)
+        
+        #click regsiter button
+        self.browser.find_element_by_name('register').click()
+        time.sleep(1)
+
+        #check the register should be unsuccessful
+        if (self.browser.current_url != expected_url):
+            unsuccessful = False
+        self.assertEquals(unsuccessful, False)

@@ -11,16 +11,16 @@
     <table class="">
       <tr>
         <th>Tenant Name</th>
-        <th>Status</th>
+
         <th>Update</th>
         <th>View</th>
 
       </tr>
-      <h4>NOTE THIS IS WRONG!!!!!! DONT FOLLOW THIS PART i realised for this part it should not be looping thru the checklist model (the for i in tenants). it should show the all the tenants, like how the search bar shows the tenant on click. </h4>
+
       {% for i in audits %}
       <tr>
         <td>{{ i.tenant.name }}</td>
-        <td>{{ i.status }}</td>
+
         
         <td>
           <a class="updateButton" href="{% url 'checklist' %}">Start</a>
@@ -37,7 +37,7 @@
   <div class="">
     <h2>RECENT AUDITS</h2>
     <div class="">
-      <table class="">
+      <table class="height">
         <tr>
           <th>Tenant</th>
 

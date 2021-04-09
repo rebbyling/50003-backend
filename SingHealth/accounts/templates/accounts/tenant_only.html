@@ -11,23 +11,26 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap"
       rel="stylesheet"
     /></head>
-    <div>{% for i in audits %}
-        <h1>{{ i.tenant.name }}</h1>{% endfor %}
+    <div>
+
         <table class="">
       <tr>
         {% comment %} <th>Tenant Name</th> {% endcomment %}
-        <th>Status</th>
-          <th>Timestamp Track</th>
-          <th>Comment</th>
+          <th>Tenant Name</th>
+
+
+
           <th>Update</th>
 
       </tr>
+
             {% for i in audits %}
       <tr>
         {% comment %} <td>{{ i.tenant.name }}</td> {% endcomment %}
-        <td>{{ i.status }}</td>
-      <td>{{ i.date_audited }}</td>
-      <td>{{ i.comment }}</td>
+          <td>{{ i.name }}</td>
+
+
+
         <td>
           <a class="updateButton" href="{% url 'upload_image' %}">Update</a>
 
