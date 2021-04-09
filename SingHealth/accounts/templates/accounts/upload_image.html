@@ -10,6 +10,7 @@
       {{ form.as_p }}
     <!-- <input class="uploadImage" type="file" name="document"> -->
     <button class="uploadSubmit" type="submit">Upload</button>
+        <a class="logout" href={% url 'home' %}> Go To Home</a>
     </form>
     {% if url %}
         <p>Uploaded file: <a href="{{ url }}">{{ url }}</a></p>

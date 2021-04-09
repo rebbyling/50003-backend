@@ -12,8 +12,15 @@ class TestLoginPage(LiveServerTestCase):
 
     def setUp(self):
         super(TestLoginPage, self).setUp()
-        self.browser = webdriver.Chrome('functional_tests/chromedriver')
-        
+
+        #emulate the phone
+        mobile_emulation = { "deviceName": "iPhone X" }
+
+        chrome_options = webdriver.ChromeOptions()
+        chrome_options.add_experimental_option("mobileEmulation", mobile_emulation)
+
+        self.browser = webdriver.Chrome(executable_path = 'functional_tests/chromedriver',options=chrome_options)
+        self.browser.maximize_window()
         self.client = Client()
 
         #create staff user
@@ -33,10 +40,10 @@ class TestLoginPage(LiveServerTestCase):
         expected_url = "http://127.0.0.1:8000/admin/"
         self.browser.get("http://127.0.0.1:8000/admin")
 
-        self.browser.find_element_by_id('id_username').send_keys('sky_test')
-        time.sleep(0.5)
-        self.browser.find_element_by_id('id_password').send_keys('testing12#')
-        time.sleep(0.5)
+        self.browser.find_element_by_id('id_username').send_keys('staff2')
+        time.sleep(1)
+        self.browser.find_element_by_id('id_password').send_keys('cohort4meixuan')
+        time.sleep(1)
         self.browser.find_element_by_xpath('//input[@value="Log in"]').click()
         time.sleep(1)
         self.assertEquals(self.browser.current_url, expected_url)
@@ -55,14 +62,11 @@ class TestLoginPage(LiveServerTestCase):
 
             self.browser.get("http://127.0.0.1:8000/login")
         
-            self.browser.find_element_by_name('username').send_keys('sky')
-            time.sleep(0.5)
-            self.browser.find_element_by_name('password').send_keys('testing12#')
-            time.sleep(0.5)
-            self.browser.find_element_by_name('login').click()
-            #self.browser.find_element_by_xpath('//input[@value="Log in"]').click()
+            self.browser.find_element_by_name('username').send_keys('tenant3')
             time.sleep(1)
-            # print(self.browser.page_source)
+            self.browser.find_element_by_name('password').send_keys('cohort4meixuan')
+            time.sleep(1)
+            self.browser.find_element_by_name('login').click()
 
             self.assertEquals(self.browser.current_url, expected_url)
         else:

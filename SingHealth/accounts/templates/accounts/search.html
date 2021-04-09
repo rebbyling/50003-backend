@@ -18,8 +18,7 @@
       <tr>
         <th>Shop</th>
         {% comment %} <th>Auditor</th> {% endcomment %}
-        <th>Date</th>
-        <th>Done</th>
+
         <th>Email</th>
         <th>Details</th>
       </tr>
@@ -27,8 +26,7 @@
       <tr>
         <td>{{t.tenant.name}}</td>
         {% comment %} <td>{{t.staff}}</td> {% endcomment %}
-        <td>{{t.date_audited}}</td>
-        <td>{{t.status}}</td>
+
         <td><a class="updateButton" href="{% url 'plain_email' %}">email</a></td>
          <td><a class="updateButton" href="{% url 'tenantsDetail' t.pk %}">Details</a></td>
       </tr>
