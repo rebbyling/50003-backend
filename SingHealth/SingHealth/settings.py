@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'django_filters',
     'multiselectfield',
+    'defender',
 
 ]
 
@@ -52,7 +53,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    #'django_xss_fuzzer.ViewFuzzerMiddleware',
+    'defender.middleware.FailedLoginMiddleware',
+
 ]
+
+DEFENDER_LOGIN_FAILURE_LIMIT = 5
 
 ROOT_URLCONF = 'SingHealth.urls'
 
@@ -111,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'GMT'
 
 USE_I18N = True
 
@@ -138,3 +145,8 @@ EMAIL_PORT=587
 EMAIL_USE_TLS=True
 EMAIL_HOST_USER='singhealthaudittest@gmail.com'
 EMAIL_HOST_PASSWORD='testing12345@'
+
+SESSION_COOKIE_SECURE=True
+CSRF_COOKIE_SECURE=True
+SECURE_BROWSER_XSS_FILTER = True
+#XSS_PATTERN = '<xss id=x tabindex=1 onactivate=alert(1)></xss>'
