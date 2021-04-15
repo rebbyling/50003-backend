@@ -30,7 +30,7 @@ class TestRegisterPage(LiveServerTestCase):
         self.browser.get("http://127.0.0.1:8000/register/")
         
         #dummy testing data
-        username = 'Test1'
+        username = 'Test3'
         email = 'abc@mail.com'
         password = 'testing123!'
         
@@ -75,7 +75,7 @@ class TestRegisterPage(LiveServerTestCase):
 
     def test_register_unsuccessful(self):
         """ 
-        This test register with a registered username
+            This test register with a registered username
         """
         expected_url = "http://127.0.0.1:8000/login/"
         self.browser.get("http://127.0.0.1:8000/register/")
