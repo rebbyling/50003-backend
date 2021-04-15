@@ -84,8 +84,8 @@ table {
   margin-top: 2%;
 }
 .height {
-  height: 40%;
-  overflow-y: hidden;
+  height: 790px;
+  overflow-y: auto;
 }
 table td,
 table th {

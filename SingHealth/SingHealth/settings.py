@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_filters',
     'multiselectfield',
     'defender',
+    'axes',
 
 ]
 
@@ -57,11 +58,24 @@ MIDDLEWARE = [
     #'django_xss_fuzzer.ViewFuzzerMiddleware',
     'defender.middleware.FailedLoginMiddleware',
 
+    'axes.middleware.AxesMiddleware',
 ]
 
 DEFENDER_LOGIN_FAILURE_LIMIT = 5
 
 ROOT_URLCONF = 'SingHealth.urls'
+
+AXES_LOCK_OUT_AT_FAILURE = True #After the number of allowed login attempts are exceeded, should we lock out this IP 
+                                #(and optional user agent)? Default: True
+
+
+AXES_USE_USER_AGENT = True #If True, lock out and log based on the IP address and the user agent. This means requests from different user agents but from the same IP are treated differently.
+                           #This settings has no effect if the AXES_ONLY_USER_FAILURES setting is active. Default: False
+
+AXES_COOLOFF_TIME = 1 # timeout in hours
+AXES_FAILURE_LIMIT = 5
+AXES_LOCK_OUT_BY_USER_OR_IP = True # If True, prevent login from if the attempt limit has been exceeded for IP or username.
+
 
 TEMPLATES = [
     {
@@ -110,6 +124,14 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
+]
+
+AUTHENTICATION_BACKENDS = [
+    # AxesBackend should be the first backend in the AUTHENTICATION_BACKENDS list.
+    'axes.backends.AxesBackend',
+
+    # Django ModelBackend is the default authentication backend.
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 
