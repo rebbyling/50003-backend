@@ -57,7 +57,6 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     #'django_xss_fuzzer.ViewFuzzerMiddleware',
     'defender.middleware.FailedLoginMiddleware',
-
     'axes.middleware.AxesMiddleware',
 ]
 
