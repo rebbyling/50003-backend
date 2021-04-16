@@ -178,7 +178,8 @@ def userPage(request):
 #       return redirect('/')
 #   context = {'item':audit}
 #   return render(request,'accounts/delete.html',context)
-
+@login_required(login_url='login')
+@admin_only
 def search(request):
     audits = Audit.objects.all()
     #tenants = Tenant.objects.all()
@@ -203,7 +204,8 @@ class tenantchartview(TemplateView):
         ##
         return context
 
-
+@login_required(login_url='login')
+@admin_only
 def export_excel(request):
     response = HttpResponse(content_type='application/ms-excel')
     response['Content-Disposition'] = 'attachment; filename = "SinghealthAudit' + str(datetime.datetime.now()) + '.xls"'
@@ -257,6 +259,7 @@ def audit_details(request, pk):
 
 # This email can type commments and attach file
 @login_required(login_url='login')
+@admin_only
 def send_mail_plain_with_file(request):
     message = request.POST.get('message', '')
     subject = request.POST.get('subject', '')
@@ -272,6 +275,7 @@ def send_mail_plain_with_file(request):
 
 # This  email can only type  comments
 @login_required(login_url='login')
+@admin_only
 def send_plain_mail(request):
     message = request.POST.get('message', '')
     subject = request.POST.get('subject', '')
@@ -283,6 +287,7 @@ def send_plain_mail(request):
 
 
 @login_required(login_url='login')
+@admin_only
 def email(request):
     return render(request, "accounts/email.html")
 
@@ -302,7 +307,8 @@ def email(request):
 # context['checked'] = score_object.checked
 # context['test'] = score_object.unchecked
 # return redirect('http://127.0.0.1:8000/checklist/')
-
+@login_required(login_url='login')
+@admin_only
 def checklist_view(request):
     context = {}
     form = ScoreForm()

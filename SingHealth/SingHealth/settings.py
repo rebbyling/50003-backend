@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'multiselectfield',
     'defender',
     'axes',
+    'django_extensions',
 
 ]
 
@@ -160,7 +161,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST="smtp.gmail.com"#gmail as host
 EMAIL_PORT=587
 EMAIL_USE_TLS=True
