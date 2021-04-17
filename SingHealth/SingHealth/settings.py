@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'multiselectfield',
     'defender',
     'axes',
+    'django_extensions',
 
 ]
 

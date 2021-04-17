@@ -8,5 +8,5 @@ from .models import *
 admin.site.register(Staff)
 admin.site.register(Tenant)
 admin.site.register(Audit)
-admin.site.register(tenant_score)
+#admin.site.register(tenant_score)
 admin.site.register(checklist)

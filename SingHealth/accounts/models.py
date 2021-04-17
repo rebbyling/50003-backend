@@ -53,13 +53,13 @@ class Audit(models.Model):
     #actual_img = models.ImageField(upload_to = 'media/')
     #upload_file = models.ImageField(null=True,blank=True)
 
-class tenant_score(models.Model):
+""" class tenant_score(models.Model):
     #some dummy model to work with the graph , the checklist model should be here instead  
     name=models.CharField(max_length=50)
     score=models.IntegerField()
     
     def __str__(self):
-        return"{}-{}".format(self.name,self.score)
+        return"{}-{}".format(self.name,self.score) """
 
 class Image(models.Model):
     #image_name = models.CharField(max_length=200)
