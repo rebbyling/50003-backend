@@ -18,7 +18,7 @@
         {% comment %} <th>Tenant Name</th> {% endcomment %}
           <th>Tenant Name</th>
 
-
+          <th>View</th>
 
           <th>Update</th>
 
@@ -28,7 +28,10 @@
       <tr>
         {% comment %} <td>{{ i.tenant.name }}</td> {% endcomment %}
           <td>{{ i.name }}</td>
+<td>
+          <a class="updateButton" href="{% url 'tenantsDetail' i.pk %}">Details</a>
 
+        </td>
 
 
         <td>
