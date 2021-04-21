@@ -96,7 +96,7 @@ class TestTenantPage(LiveServerTestCase):
         select.select_by_visible_text('Gom Gom')
         time.sleep(1)
 
-        self.browser.find_element_by_xpath('//input[@id="id_actual_img"]').send_keys(os.getcwd()+ "/image/images/spongebob.png")
+        self.browser.find_element_by_xpath('//input[@id="id_actual_img"]').send_keys(os.getcwd()+ "/image/dummy.jpg")
         self.browser.find_element_by_xpath('//button[@class="uploadSubmit"]').click()
         time.sleep(1)
     

@@ -52,6 +52,7 @@ class TestLoginPage(LiveServerTestCase):
     def test_tenant_login(self):
         expected_url = "http://127.0.0.1:8000/tenant_only/"
         self.browser.get("http://127.0.0.1:8000/login")
+        time.sleep(2)
 
         self.browser.find_element_by_name('username').send_keys('tenant3')
         time.sleep(1)
