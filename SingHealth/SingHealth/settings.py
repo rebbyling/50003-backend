@@ -172,3 +172,4 @@ SESSION_COOKIE_SECURE=True
 CSRF_COOKIE_SECURE=True
 SECURE_BROWSER_XSS_FILTER = True
 #XSS_PATTERN = '<xss id=x tabindex=1 onactivate=alert(1)></xss>'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
