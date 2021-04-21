@@ -7,20 +7,6 @@ from django import forms
 from .models import checklist
 from django.utils.translation import gettext_lazy as _
 
-#class AddItemForm(forms.ModelForm):
-    #class Meta:
-       # model = checklistconditions
-        #fields = [
-         #   'description',
-        #]
-        
-#class CheckboxForm(forms.ModelForm):
-   #class Meta:
-       # model = checklist
-        #fields = ['items']
-        
-    #items = forms.ModelMultipleChoiceField(queryset = checklistconditions.objects.all(),widget = forms.CheckboxSelectMultiple ,label = "")
-    #overwriting the
 
 class ScoreForm(forms.ModelForm):
     class Meta:

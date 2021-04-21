@@ -219,7 +219,7 @@ def export_excel(request):
     font_style = xlwt.XFStyle()
     # making the first row bold
 
-    columns = ['Tenant', 'Score', 'Date Audited']  ##the header names of the column what should be exported?
+    columns = ['Tenant', 'Score', 'Status', 'Date Audited']  ##the header names of the column what should be exported?
 
     for column_number in range(len(columns)):
         ws.write(row_num, column_number, columns[column_number], font_style)
@@ -227,7 +227,7 @@ def export_excel(request):
     font_style = xlwt.XFStyle()
 
     # rows = tenant_score.objects.all().values_list('name','score')
-    rows = checklist.objects.all().values_list('tenant__name', 'score',
+    rows = checklist.objects.all().values_list('tenant__name', 'score', 'status',
                                                'date_audited')  # checklist attribute foreign key tenant .name tenant_name = checklist.tenant.name
 
     for row in rows:
@@ -292,21 +292,7 @@ def email(request):
     return render(request, "accounts/email.html")
 
 
-# def calculate(request):
-# form=ScoreForm(request.POST)
-# formc = ScoreForm(request.POST)
-# if request.method=="POST":
-# checked = form.cleaned_data['items']
-# score = checked.count()
-# score_object = ChecklistScore(score = score)
-# score_object.save()
-# score_object.checked = list(checked.values_list('description', flat=True))
-# score_object.unchecked = list(set(formc.fields['items'].queryset.values_list('description', flat=True)) - set(score_object.checked))
-# score_object.save()
-# context['score'] = score
-# context['checked'] = score_object.checked
-# context['test'] = score_object.unchecked
-# return redirect('http://127.0.0.1:8000/checklist/')
+
 @login_required(login_url='login')
 @admin_only
 def checklist_view(request):

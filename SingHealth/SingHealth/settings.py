@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'django_filters',
     'multiselectfield',
+    #'defender',
     'axes',
     'django_extensions',
 
@@ -56,8 +57,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     #'django_xss_fuzzer.ViewFuzzerMiddleware',
+    #'defender.middleware.FailedLoginMiddleware',
     'axes.middleware.AxesMiddleware',
 ]
+
+#DEFENDER_LOGIN_FAILURE_LIMIT = 5
 
 ROOT_URLCONF = 'SingHealth.urls'
 
