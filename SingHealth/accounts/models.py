@@ -52,6 +52,9 @@ class Audit(models.Model):
     comment = models.TextField(blank=True)
     #actual_img = models.ImageField(upload_to = 'media/')
     #upload_file = models.ImageField(null=True,blank=True)
+    def __str__(self):
+        return self.tenant.name
+
 
 
 
