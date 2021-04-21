@@ -101,6 +101,19 @@ class TestStaffNormal(LiveServerTestCase):
 
         self.browser.find_element_by_xpath('//input[@class="completeAudit"]').click()
         time.sleep(1)
+    
+    def test_search(self):
+        self.browser.get('http://127.0.0.1:8000/search/')
+        time.sleep(1)
+
+        #select filter search
+        select = Select(self.browser.find_element_by_id('id_tenant'))
+        select.select_by_visible_text('Gom Gom')
+        time.sleep(1)
+        
+        #click search button
+        self.browser.find_element_by_xpath('//button[@class="searchButton"]').click()
+        time.sleep(1)
 
 
 

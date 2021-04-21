@@ -37,9 +37,12 @@ class TestSpamLogin(LiveServerTestCase):
                 print("The "+ str(i) +"th time")
                 username = self.browser.find_element_by_name('username')
                 username.send_keys(get_random_username())
+                time.sleep(0.5)
                 password = self.browser.find_element_by_name('password')
                 password.send_keys(get_random_password())
+                time.sleep(0.5)
                 self.browser.find_element_by_name('login').click()
                 time.sleep(1)
         except(Exception):
+            time.sleep(3)
             print("AHA you are caught for brutal force login attempts! Bad boiii")

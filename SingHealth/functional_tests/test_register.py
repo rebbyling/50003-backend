@@ -30,7 +30,7 @@ class TestRegisterPage(LiveServerTestCase):
         self.browser.get("http://127.0.0.1:8000/register/")
         
         #dummy testing data
-        username = 'Test3'
+        username = 'Test5'
         email = 'abc@mail.com'
         password = 'testing123!'
         
@@ -104,6 +104,80 @@ class TestRegisterPage(LiveServerTestCase):
         #click regsiter button
         self.browser.find_element_by_name('register').click()
         time.sleep(1)
+
+        #check the register should be unsuccessful
+        if (self.browser.current_url != expected_url):
+            unsuccessful = False
+        self.assertEquals(unsuccessful, False)
+
+    def test_register_invalid_email(self):
+        """ 
+            This test register with an invalid email
+        """
+        expected_url = "http://127.0.0.1:8000/login/"
+        self.browser.get("http://127.0.0.1:8000/register/")
+        
+        #dummy testing data
+        username = 'Testing'
+        email = 'gadfgsyghd'
+        password = 'testing123!'
+        
+        #fill in username
+        self.browser.find_element_by_id('id_username').send_keys(username)
+        time.sleep(1)
+        
+        #fill in email
+        self.browser.find_element_by_id('id_email').send_keys(email)
+        time.sleep(1)
+        
+        #fill in password
+        self.browser.find_element_by_id('id_password1').send_keys(password)
+        time.sleep(1)
+        
+        #confirm password
+        self.browser.find_element_by_id('id_password2').send_keys(password)
+        time.sleep(1)
+        
+        #click regsiter button
+        self.browser.find_element_by_name('register').click()
+        time.sleep(3)
+
+        #check the register should be unsuccessful
+        if (self.browser.current_url != expected_url):
+            unsuccessful = False
+        self.assertEquals(unsuccessful, False)
+
+    def test_register_simple_password(self):
+        """ 
+            This test register with a registered username
+        """
+        expected_url = "http://127.0.0.1:8000/login/"
+        self.browser.get("http://127.0.0.1:8000/register/")
+        
+        #dummy testing data
+        username = 'Testing'
+        email = 'abc@mail.com'
+        password = 'testing123'
+        
+        #fill in username
+        self.browser.find_element_by_id('id_username').send_keys(username)
+        time.sleep(1)
+        
+        #fill in email
+        self.browser.find_element_by_id('id_email').send_keys(email)
+        time.sleep(1)
+        
+        #fill in password
+        self.browser.find_element_by_id('id_password1').send_keys(password)
+        time.sleep(1)
+        
+        #confirm password
+        self.browser.find_element_by_id('id_password2').send_keys(password)
+        time.sleep(1)
+        
+        #click regsiter button
+        self.browser.find_element_by_name('register').click()
+        time.sleep(3)
 
         #check the register should be unsuccessful
         if (self.browser.current_url != expected_url):
